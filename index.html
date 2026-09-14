@@ -22,9 +22,57 @@
             background: #f5f3ff;
             color: #25233a;
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           ANIMATIE LA INCARCAREA PAGINII
+        ========================= */
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
         }
 
         /* MENIU */
+
         header {
             background: #211b3d;
             color: white;
@@ -32,6 +80,8 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+            animation: fadeDown 0.7s ease;
         }
 
         nav {
@@ -45,6 +95,12 @@
         .logo {
             font-size: 22px;
             font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         nav a {
@@ -52,13 +108,34 @@
             text-decoration: none;
             margin-left: 20px;
             font-size: 15px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        /* Linie animata sub link */
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #c9a7ff;
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
         }
 
         nav a:hover {
             color: #c9a7ff;
         }
 
+        nav a:hover::after {
+            width: 100%;
+        }
+
+
         /* PAGINA PRINCIPALA */
+
         .hero {
             min-height: 80vh;
             display: flex;
@@ -67,10 +144,41 @@
             text-align: center;
             padding: 60px 20px;
             background: linear-gradient(135deg, #d9c7ff, #f9d9ec);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Cercuri decorative animate */
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        .hero::before {
+            width: 180px;
+            height: 180px;
+            top: 10%;
+            left: 8%;
+        }
+
+        .hero::after {
+            width: 250px;
+            height: 250px;
+            bottom: -80px;
+            right: 5%;
+            animation-delay: 1s;
         }
 
         .hero-content {
             max-width: 850px;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 1s ease;
         }
 
         .hero h1 {
@@ -92,13 +200,23 @@
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108,75,196,0.3);
         }
 
         .button:hover {
             background: #51349c;
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(108,75,196,0.4);
         }
 
+        .button:active {
+            transform: scale(0.95);
+        }
+
+
         /* SECTIUNI */
+
         section {
             padding: 70px 8%;
         }
@@ -117,7 +235,11 @@
             font-size: 18px;
         }
 
-        /* CARDURI */
+
+        /* =========================
+           CARDURI
+        ========================= */
+
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -130,11 +252,39 @@
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 5px 20px rgba(40, 30, 70, 0.12);
-            transition: transform 0.3s;
+
+            /* Animatie */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardAppear 0.7s ease forwards;
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.25s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(40, 30, 70, 0.2);
         }
 
         .card h3 {
@@ -142,12 +292,23 @@
             margin-bottom: 12px;
         }
 
+        /* PICTOGRAME */
+
         .icon {
             font-size: 40px;
             margin-bottom: 15px;
+            display: inline-block;
+            transition: all 0.4s ease;
         }
 
+        .card:hover .icon {
+            transform: scale(1.25) rotate(-8deg);
+            animation: pulse 0.8s ease;
+        }
+
+
         /* ARTIST */
+
         .artist {
             background: #211b3d;
             color: white;
@@ -161,7 +322,9 @@
             color: #25233a;
         }
 
+
         /* RESPONSABILITATE */
+
         .important {
             background: #eee8ff;
         }
@@ -170,13 +333,74 @@
             max-width: 800px;
             margin: auto;
             font-size: 18px;
+            list-style: none;
         }
+
+        /* Elemente interactive */
 
         li {
             margin-bottom: 15px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(40,30,70,0.08);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
         }
 
+        li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 18px rgba(40,30,70,0.15);
+        }
+
+
+        /* SECTIUNE ERA DIGITALA */
+
+        .digital {
+            background: white;
+        }
+
+        .digital-box {
+            max-width: 850px;
+            margin: 35px auto 0;
+            background: linear-gradient(135deg, #f9d9ec, #d9c7ff);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(40,30,70,0.12);
+            transition: transform 0.3s ease;
+        }
+
+        .digital-box:hover {
+            transform: scale(1.02);
+        }
+
+
+        /* BUTON INTERACTIV */
+
+        .info-button {
+            margin-top: 25px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            background: #6c4bc4;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .info-button:hover {
+            background: #51349c;
+            transform: translateY(-3px);
+        }
+
+
         /* CONCLUZIE */
+
         .conclusion {
             text-align: center;
             background: linear-gradient(135deg, #f9d9ec, #d9c7ff);
@@ -188,7 +412,61 @@
             font-size: 19px;
         }
 
+
+        /* MESAJ INTERACTIV */
+
+        #message {
+            max-width: 700px;
+            margin: 20px auto 0;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.7);
+
+            display: none;
+
+            animation: fadeUp 0.5s ease;
+        }
+
+
+        /* BUTON SUS */
+
+        #topButton {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            width: 50px;
+            height: 50px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: #6c4bc4;
+            color: white;
+
+            font-size: 22px;
+            cursor: pointer;
+
+            opacity: 0;
+            pointer-events: none;
+
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+
+        #topButton.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #topButton:hover {
+            transform: translateY(-5px);
+            background: #51349c;
+        }
+
+
         /* FOOTER */
+
         footer {
             background: #211b3d;
             color: white;
@@ -196,7 +474,9 @@
             padding: 25px;
         }
 
+
         /* TELEFON */
+
         @media (max-width: 700px) {
 
             .hero h1 {
@@ -215,33 +495,63 @@
                 margin-left: 8px;
                 margin-right: 8px;
             }
+
+            section {
+                padding: 50px 6%;
+            }
         }
+
     </style>
 </head>
 
 <body>
 
+
+<!-- =========================
+     MENIU
+========================= -->
+
 <header>
+
     <nav>
-        <div class="logo">🎨 Cultura informațională</div>
+
+        <div class="logo">
+            🎨 Cultura informațională
+        </div>
 
         <div>
+
             <a href="#despre">Despre</a>
+
             <a href="#artist">Artistul</a>
-            <a href="#responsabilitate">Responsabilitate</a>
-            <a href="#concluzie">Concluzie</a>
+
+            <a href="#responsabilitate">
+                Responsabilitate
+            </a>
+
+            <a href="#concluzie">
+                Concluzie
+            </a>
+
         </div>
+
     </nav>
+
 </header>
 
 
-<!-- PAGINA PRINCIPALA -->
+
+<!-- =========================
+     PAGINA PRINCIPALA
+========================= -->
 
 <section class="hero">
 
     <div class="hero-content">
 
-        <h1>Cultura informațională și rolul unui artist</h1>
+        <h1>
+            Cultura informațională și rolul unui artist
+        </h1>
 
         <p>
             Cum informația, arta și tehnologia se întâlnesc
@@ -249,7 +559,7 @@
         </p>
 
         <a href="#despre" class="button">
-            Descoperă mai mult
+            Descoperă mai mult ↓
         </a>
 
     </div>
@@ -257,26 +567,38 @@
 </section>
 
 
-<!-- DESPRE CULTURA INFORMATIONALA -->
+
+<!-- =========================
+     DESPRE
+========================= -->
 
 <section id="despre">
 
-    <h2>Ce este cultura informațională?</h2>
+    <h2>
+        Ce este cultura informațională?
+    </h2>
 
     <p class="intro">
+
         Cultura informațională reprezintă capacitatea unei persoane
         de a găsi, înțelege, analiza, evalua și utiliza informația
         într-un mod responsabil și eficient.
+
     </p>
 
 
     <div class="cards">
 
+
         <div class="card">
 
-            <div class="icon">🔎</div>
+            <div class="icon">
+                🔎
+            </div>
 
-            <h3>Căutarea informației</h3>
+            <h3>
+                Căutarea informației
+            </h3>
 
             <p>
                 Identificarea informațiilor relevante folosind
@@ -286,11 +608,16 @@
         </div>
 
 
+
         <div class="card">
 
-            <div class="icon">🧠</div>
+            <div class="icon">
+                🧠
+            </div>
 
-            <h3>Gândirea critică</h3>
+            <h3>
+                Gândirea critică
+            </h3>
 
             <p>
                 Analizarea informațiilor și verificarea acestora
@@ -300,11 +627,16 @@
         </div>
 
 
+
         <div class="card">
 
-            <div class="icon">💻</div>
+            <div class="icon">
+                💻
+            </div>
 
-            <h3>Tehnologia</h3>
+            <h3>
+                Tehnologia
+            </h3>
 
             <p>
                 Utilizarea responsabilă a internetului,
@@ -313,24 +645,35 @@
 
         </div>
 
+
     </div>
 
 </section>
 
 
-<!-- ROLUL ARTISTULUI -->
+
+<!-- =========================
+     ARTIST
+========================= -->
 
 <section id="artist" class="artist">
 
-    <h2>Rolul artistului în cultura informațională</h2>
+    <h2>
+        Rolul artistului în cultura informațională
+    </h2>
 
     <div class="cards">
 
+
         <div class="card">
 
-            <div class="icon">🎨</div>
+            <div class="icon">
+                🎨
+            </div>
 
-            <h3>Creator de mesaje</h3>
+            <h3>
+                Creator de mesaje
+            </h3>
 
             <p>
                 Artistul transmite idei, emoții și opinii
@@ -341,11 +684,16 @@
         </div>
 
 
+
         <div class="card">
 
-            <div class="icon">🌐</div>
+            <div class="icon">
+                🌐
+            </div>
 
-            <h3>Artistul digital</h3>
+            <h3>
+                Artistul digital
+            </h3>
 
             <p>
                 În mediul digital, artistul poate comunica
@@ -356,11 +704,16 @@
         </div>
 
 
+
         <div class="card">
 
-            <div class="icon">💡</div>
+            <div class="icon">
+                💡
+            </div>
 
-            <h3>Influența asupra publicului</h3>
+            <h3>
+                Influența asupra publicului
+            </h3>
 
             <p>
                 O creație artistică poate influența modul
@@ -370,16 +723,22 @@
 
         </div>
 
+
     </div>
 
 </section>
 
 
-<!-- RESPONSABILITATE -->
+
+<!-- =========================
+     RESPONSABILITATE
+========================= -->
 
 <section id="responsabilitate" class="important">
 
-    <h2>Responsabilitatea artistului</h2>
+    <h2>
+        Responsabilitatea artistului
+    </h2>
 
     <ul>
 
@@ -411,11 +770,16 @@
 </section>
 
 
-<!-- ARTISTUL ÎN ERA DIGITALA -->
 
-<section>
+<!-- =========================
+     ERA DIGITALA
+========================= -->
 
-    <h2>Artistul în era digitală</h2>
+<section class="digital">
+
+    <h2>
+        Artistul în era digitală
+    </h2>
 
     <p class="intro">
 
@@ -432,14 +796,44 @@
 
     </p>
 
+
+    <div class="digital-box">
+
+        <h3>
+            🎯 Știai că?
+        </h3>
+
+        <p>
+            Arta digitală poate combina desenul, animația,
+            programarea și interactivitatea pentru a crea
+            experiențe complet noi.
+        </p>
+
+        <button class="info-button" onclick="showMessage()">
+            Afișează un mesaj
+        </button>
+
+        <div id="message">
+            ✨ Un artist digital nu doar creează imagini,
+            ci poate transforma informația într-o experiență
+            vizuală și interactivă.
+        </div>
+
+    </div>
+
 </section>
 
 
-<!-- CONCLUZIE -->
+
+<!-- =========================
+     CONCLUZIE
+========================= -->
 
 <section id="concluzie" class="conclusion">
 
-    <h2>Concluzie</h2>
+    <h2>
+        Concluzie
+    </h2>
 
     <p>
 
@@ -463,6 +857,11 @@
 </section>
 
 
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
     <p>
@@ -470,6 +869,87 @@
     </p>
 
 </footer>
+
+
+
+<!-- BUTON SCROLL SUS -->
+
+<button id="topButton" onclick="scrollToTop()">
+    ↑
+</button>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    /* Mesaj interactiv */
+
+    function showMessage() {
+
+        const message = document.getElementById("message");
+
+        if (message.style.display === "block") {
+
+            message.style.display = "none";
+
+        } else {
+
+            message.style.display = "block";
+
+        }
+
+    }
+
+
+    /* Buton pentru revenire sus */
+
+    const topButton = document.getElementById("topButton");
+
+    window.addEventListener("scroll", function() {
+
+        if (window.scrollY > 400) {
+
+            topButton.classList.add("show");
+
+        } else {
+
+            topButton.classList.remove("show");
+
+        }
+
+    });
+
+
+    function scrollToTop() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* Efect de click pe carduri */
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+
+        card.addEventListener("click", function() {
+
+            this.classList.toggle("selected");
+
+        });
+
+    });
+
+</script>
+
 
 </body>
 </html>
