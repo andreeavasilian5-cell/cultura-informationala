@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cultura informațională și rolul artistului</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f3ff;
+            color: #25233a;
+            line-height: 1.6;
+        }
+
+        /* MENIU */
+        header {
+            background: #211b3d;
+            color: white;
+            padding: 20px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #c9a7ff;
+        }
+
+        /* PAGINA PRINCIPALA */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #d9c7ff, #f9d9ec);
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #211b3d;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #6c4bc4;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #51349c;
+        }
+
+        /* SECTIUNI */
+        section {
+            padding: 70px 8%;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 35px;
+            color: #3d2d72;
+        }
+
+        .intro {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        /* CARDURI */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(40, 30, 70, 0.12);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card h3 {
+            color: #6c4bc4;
+            margin-bottom: 12px;
+        }
+
+        .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        /* ARTIST */
+        .artist {
+            background: #211b3d;
+            color: white;
+        }
+
+        .artist h2 {
+            color: white;
+        }
+
+        .artist .cards .card {
+            color: #25233a;
+        }
+
+        /* RESPONSABILITATE */
+        .important {
+            background: #eee8ff;
+        }
+
+        ul {
+            max-width: 800px;
+            margin: auto;
+            font-size: 18px;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        /* CONCLUZIE */
+        .conclusion {
+            text-align: center;
+            background: linear-gradient(135deg, #f9d9ec, #d9c7ff);
+        }
+
+        .conclusion p {
+            max-width: 800px;
+            margin: auto;
+            font-size: 19px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #211b3d;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* TELEFON */
+        @media (max-width: 700px) {
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            nav a {
+                margin-left: 8px;
+                margin-right: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">🎨 Cultura informațională</div>
+
+        <div>
+            <a href="#despre">Despre</a>
+            <a href="#artist">Artistul</a>
+            <a href="#responsabilitate">Responsabilitate</a>
+            <a href="#concluzie">Concluzie</a>
+        </div>
+    </nav>
+</header>
+
+
+<!-- PAGINA PRINCIPALA -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>Cultura informațională și rolul unui artist</h1>
+
+        <p>
+            Cum informația, arta și tehnologia se întâlnesc
+            în societatea digitală.
+        </p>
+
+        <a href="#despre" class="button">
+            Descoperă mai mult
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- DESPRE CULTURA INFORMATIONALA -->
+
+<section id="despre">
+
+    <h2>Ce este cultura informațională?</h2>
+
+    <p class="intro">
+        Cultura informațională reprezintă capacitatea unei persoane
+        de a găsi, înțelege, analiza, evalua și utiliza informația
+        într-un mod responsabil și eficient.
+    </p>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="icon">🔎</div>
+
+            <h3>Căutarea informației</h3>
+
+            <p>
+                Identificarea informațiilor relevante folosind
+                surse potrivite și credibile.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🧠</div>
+
+            <h3>Gândirea critică</h3>
+
+            <p>
+                Analizarea informațiilor și verificarea acestora
+                înainte de a le considera adevărate.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">💻</div>
+
+            <h3>Tehnologia</h3>
+
+            <p>
+                Utilizarea responsabilă a internetului,
+                rețelelor sociale și instrumentelor digitale.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ROLUL ARTISTULUI -->
+
+<section id="artist" class="artist">
+
+    <h2>Rolul artistului în cultura informațională</h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="icon">🎨</div>
+
+            <h3>Creator de mesaje</h3>
+
+            <p>
+                Artistul transmite idei, emoții și opinii
+                prin imagini, ilustrații, animații sau alte forme
+                de artă.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🌐</div>
+
+            <h3>Artistul digital</h3>
+
+            <p>
+                În mediul digital, artistul poate comunica
+                cu un public foarte larg prin intermediul
+                internetului și al rețelelor sociale.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">💡</div>
+
+            <h3>Influența asupra publicului</h3>
+
+            <p>
+                O creație artistică poate influența modul
+                în care oamenii percep anumite idei,
+                probleme și evenimente.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RESPONSABILITATE -->
+
+<section id="responsabilitate" class="important">
+
+    <h2>Responsabilitatea artistului</h2>
+
+    <ul>
+
+        <li>
+            🎨 Să creeze lucrări originale și să respecte
+            drepturile de autor.
+        </li>
+
+        <li>
+            🔎 Să verifice informațiile pe care le transmite
+            prin creațiile sale.
+        </li>
+
+        <li>
+            📚 Să respecte munca și creațiile altor artiști.
+        </li>
+
+        <li>
+            🌐 Să folosească responsabil platformele digitale.
+        </li>
+
+        <li>
+            💭 Să încurajeze publicul să gândească critic
+            și să analizeze informațiile.
+        </li>
+
+    </ul>
+
+</section>
+
+
+<!-- ARTISTUL ÎN ERA DIGITALA -->
+
+<section>
+
+    <h2>Artistul în era digitală</h2>
+
+    <p class="intro">
+
+        Tehnologia a schimbat modul în care artiștii creează,
+        comunică și își prezintă lucrările. Programele de desen
+        digital, animația, modelarea 3D și dezvoltarea jocurilor
+        video oferă noi posibilități de exprimare artistică.
+
+        <br><br>
+
+        Artistul modern nu este doar un creator de imagini.
+        El poate deveni și un comunicator, educator și participant
+        activ în cultura digitală.
+
+    </p>
+
+</section>
+
+
+<!-- CONCLUZIE -->
+
+<section id="concluzie" class="conclusion">
+
+    <h2>Concluzie</h2>
+
+    <p>
+
+        Cultura informațională este importantă pentru fiecare
+        persoană care activează în mediul digital.
+
+        Pentru un artist, aceasta înseamnă capacitatea de a
+        utiliza informația în mod critic, de a respecta
+        proprietatea intelectuală și de a transmite publicului
+        mesaje responsabile.
+
+        <br><br>
+
+        <strong>
+            Artistul nu doar creează artă — el contribuie
+            la modul în care oamenii văd și înțeleg lumea.
+        </strong>
+
+    </p>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 — Cultura informațională și rolul artistului
+    </p>
+
+</footer>
+
+</body>
+</html>
