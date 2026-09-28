@@ -1,693 +1,1864 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cultura informațională și rolul artistului</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>Cultura informațională și rolul artistului</title>
 
-        html {
-            scroll-behavior: smooth;
-        }
+<style>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f3ff;
-            color: #25233a;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+/* =========================================================
+   RESET
+========================================================= */
 
-        /* BARĂ PROGRES SCROLL */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.2);
-            z-index: 1001;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #a777e3, #6e8efb);
-            width: 0%;
-            transition: width 0.1s ease-out;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        /* ANIMAȚII */
-        @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f3ff;
+    color: #25233a;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* =========================================================
+   BACKGROUND DECORATIV
+========================================================= */
 
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+.background-shapes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
 
-        @keyframes pulseHint {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3px);
+    opacity: 0.25;
+    animation: floating 8s ease-in-out infinite;
+}
 
-        /* MENIU DE NAVIGARE */
-        header {
-            background: #211b3d;
-            color: white;
-            padding: 15px 8%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
-            animation: fadeDown 0.7s ease;
-        }
+.shape.one {
+    width: 300px;
+    height: 300px;
+    background: #c9a7ff;
+    top: 10%;
+    left: -100px;
+}
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+.shape.two {
+    width: 250px;
+    height: 250px;
+    background: #f9b8df;
+    top: 45%;
+    right: -80px;
+    animation-delay: 2s;
+}
 
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
+.shape.three {
+    width: 180px;
+    height: 180px;
+    background: #a7b7ff;
+    bottom: 10%;
+    left: 15%;
+    animation-delay: 4s;
+}
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
 
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            list-style: none;
-        }
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(255,255,255,0.2);
+    z-index: 2000;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 15px;
-            position: relative;
-            transition: color 0.3s;
-            padding: 5px 0;
-        }
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#a777e3,#6e8efb);
+}
 
-        nav a::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: #c9a7ff;
-            left: 0;
-            bottom: 0;
-            transition: width 0.3s ease;
-        }
+/* =========================================================
+   ANIMATII
+========================================================= */
 
-        nav a:hover {
-            color: #c9a7ff;
-        }
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
 
-        nav a:hover::after {
-            width: 100%;
-        }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        /* HERO SECTION */
-        .hero {
-            min-height: 75vh;
-            display: flex;
-[28.09.2026 20:50] Yoma: justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #d9c7ff, #f9d9ec);
-            position: relative;
-            overflow: hidden;
-        }
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
 
-        .hero::before, .hero::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.25);
-            animation: floating 5s ease-in-out infinite;
-        }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        .hero::before { width: 180px; height: 180px; top: 10%; left: 8%; }
-        .hero::after { width: 250px; height: 250px; bottom: -80px; right: 5%; animation-delay: 1s; }
+@keyframes floating {
+    0%,100% {
+        transform: translateY(0);
+    }
 
-        .hero-content {
-            max-width: 850px;
-            position: relative;
-            z-index: 2;
-            animation: fadeUp 1s ease;
-        }
+    50% {
+        transform: translateY(-25px);
+    }
+}
 
-        .hero h1 { font-size: 48px; margin-bottom: 20px; color: #211b3d; }
-        .hero p { font-size: 20px; margin-bottom: 30px; }
+@keyframes pulse {
+    0%,100% {
+        transform: scale(1);
+    }
 
-        .button {
-            display: inline-block;
-            padding: 14px 28px;
-            background: #6c4bc4;
-            color: white;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(108,75,196,0.3);
-        }
+    50% {
+        transform: scale(1.08);
+    }
+}
 
-        .button:hover {
-            background: #51349c;
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 8px 20px rgba(108,75,196,0.4);
-        }
+@keyframes glow {
+    0%,100% {
+        box-shadow: 0 0 10px rgba(139,92,246,0.2);
+    }
 
-        /* SECTIUNI */
-        section { padding: 70px 8%; }
-        section h2 { text-align: center; font-size: 34px; margin-bottom: 20px; color: #3d2d72; }
+    50% {
+        box-shadow: 0 0 30px rgba(139,92,246,0.6);
+    }
+}
 
-        .section-desc {
-            text-align: center;
-            max-width: 750px;
-            margin: 0 auto 35px auto;
-            font-size: 17px;
-            color: #524b70;
-        }
+@keyframes catWalk {
+    0% {
+        transform: translateX(0);
+    }
 
-        /* INDICIU VIZUAL */
-        .hint-badge {
-            display: inline-block;
-            background: #ffe699;
-            color: #5c4300;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            animation: pulseHint 2s infinite;
-        }
+    50% {
+        transform: translateX(12px);
+    }
 
-        /* PANOUL INTERACTIV (LABORATOR ARTIST) */
-        .interactive-panel-section {
-            background: #1a1530;
-            color: white;
-            border-radius: 25px;
-            margin: 40px 8%;
-            padding: 50px 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+    100% {
+        transform: translateX(0);
+    }
+}
 
-        .interactive-panel-section h2 { color: #ffffff; }
-        .interactive-panel-section .section-desc { color: #b3a7d6; }
+@keyframes sparkle {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
 
-        .lab-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
-        }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
 
-        .lab-tools {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            max-width: 450px;
-            justify-content: center;
-        }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
 
-        .tool-btn {
-            background: #2d2552;
-            border: 2px solid #6c4bc4;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+/* =========================================================
+   HEADER
+========================================================= */
 
-        .tool-btn:hover {
-            background: #6c4bc4;
-            transform: scale(1.08) translateY(-3px);
-            box-shadow: 0 5px 15px rgba(108,75,196,0.5);
-        }
+header {
+    background: #211b3d;
+    color: white;
+    padding: 15px 7%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+    animation: fadeDown 0.7s ease;
+}
 
-        .tool-btn.active {
-            background: #8b5cf6;
-            border-color: #a78bfa;
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
-        }
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
 
-        .lab-display {
-            background: #251f42;
-            border-radius: 20px;
-            padding: 30px;
-            min-width: 300px;
-            max-width: 450px;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-[28.09.2026 20:50] Yoma: justify-content: center;
-            align-items: center;
-            text-align: center;
-            border: 1px solid #3d346b;
-            position: relative;
-        }
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+}
 
-        .lab-icon-preview {
-            font-size: 60px;
-            margin-bottom: 15px;
-            transition: transform 0.5s ease;
-        }
+.nav-links {
+    display: flex;
+    gap: 18px;
+    list-style: none;
+    flex-wrap: wrap;
+}
 
-        .lab-icon-preview.animate-pop {
-            transform: scale(1.3) rotate(10deg);
-        }
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
 
-        /* CARDURI 3D FLIP */
-        .cards-3d {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
+.nav-links a:hover {
+    color: #c9a7ff;
+}
 
-        .flip-card {
-            background-color: transparent;
-            height: 260px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
+/* =========================================================
+   HERO
+========================================================= */
 
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.7s;
-            transform-style: preserve-3d;
-        }
+.hero {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+[28.09.2026 21:02] Yoma: padding: 70px 20px;
+    background: linear-gradient(
+        135deg,
+        #d9c7ff,
+        #f9d9ec,
+        #d9c7ff
+    );
+    background-size: 300% 300%;
+    animation: gradientMove 12s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
 
-        .flip-card:hover .flip-card-inner, .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
 
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 5px 20px rgba(40, 30, 70, 0.12);
-        }
+    50% {
+        background-position: 100% 50%;
+    }
 
-        .flip-card-front {
-            background: white;
-            color: #25233a;
-        }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 
-        .flip-card-back {
-            background: linear-gradient(135deg, #6c4bc4, #483285);
-            color: white;
-            transform: rotateY(180deg);
-        }
+.hero-content {
+    max-width: 900px;
+    animation: fadeUp 1s ease;
+}
 
-        /* LISTĂ RESPONSABILITATE */
-        .important { background: #eee8ff; }
-        ul.resp-list { max-width: 800px; margin: auto; list-style: none; }
-        ul.resp-list li {
-            margin-bottom: 15px;
-            background: white;
-            padding: 18px 22px;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(40,30,70,0.08);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        ul.resp-list li:hover { transform: translateX(10px); box-shadow: 0 8px 18px rgba(40,30,70,0.15); }
+.hero h1 {
+    font-size: 52px;
+    color: #211b3d;
+    margin-bottom: 20px;
+}
 
-        /* QUIZ SECTION */
-        .quiz-section {
-            background: white;
-            border-radius: 25px;
-            padding: 50px 30px;
-            max-width: 800px;
-            margin: 40px auto;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-        }
+.hero p {
+    font-size: 21px;
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 30px;
+}
 
-        .quiz-option {
-            display: block;
-            width: 100%;
-            padding: 14px 20px;
-            margin: 10px 0;
-            background: #f5f3ff;
-            border: 2px solid #d9c7ff;
-            border-radius: 12px;
-            text-align: left;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+.button {
+    display: inline-block;
+    padding: 14px 30px;
+    background: #6c4bc4;
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
 
-        .quiz-option:hover {
-            background: #e9e0ff;
-            border-color: #6c4bc4;
-        }
+.button:hover {
+    transform: translateY(-5px) scale(1.04);
+    background: #51349c;
+}
 
-        .quiz-option.correct {
-            background: #d1fae5;
-            border-color: #10b981;
-            color: #065f46;
-            font-weight: bold;
-        }
+/* =========================================================
+   SECTIUNI
+========================================================= */
 
-        .quiz-option.wrong {
-            background: #fee2e2;
-            border-color: #ef4444;
-            color: #991b1b;
-        }
+section {
+    padding: 80px 8%;
+}
 
-        .quiz-result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            display: none;
-        }
+section h2 {
+    text-align: center;
+    font-size: 35px;
+    color: #3d2d72;
+    margin-bottom: 20px;
+}
 
-        /* FOOTER & BUTTONS */
-        #topButton {
-            position: fixed;
-            right: 25px;
-            bottom: 25px;
-            width: 50px;
-            height: 50px;
-            border: none;
-            border-radius: 50%;
-[28.09.2026 20:50] Yoma: background: #6c4bc4;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            z-index: 200;
-        }
+.section-desc {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    color: #524b70;
+    font-size: 17px;
+}
 
-        #topButton.show { opacity: 1; pointer-events: auto; }
-        #topButton:hover { transform: translateY(-5px); background: #51349c; }
+/* =========================================================
+   INFO CARDS
+========================================================= */
 
-        footer { background: #211b3d; color: white; text-align: center; padding: 25px; }
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
 
-        @media (max-width: 700px) {
-            .hero h1 { font-size: 34px; }
-            nav { justify-content: center; }
-            .nav-links { flex-wrap: wrap; justify-content: center; }
-        }
-    </style>
+.info-card {
+    background: rgba(255,255,255,0.85);
+    padding: 30px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(40,30,70,0.1);
+    transition: 0.4s;
+}
+
+.info-card:hover {
+    transform: translateY(-10px) rotate(1deg);
+    box-shadow: 0 15px 35px rgba(40,30,70,0.18);
+}
+
+.info-card .icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.info-card h3 {
+    color: #493580;
+    margin-bottom: 10px;
+}
+
+/* =========================================================
+   CAT GUIDE
+========================================================= */
+
+.cat-guide {
+    position: fixed;
+    right: 25px;
+    bottom: 90px;
+    width: 90px;
+    z-index: 1500;
+    cursor: pointer;
+    animation: catWalk 3s ease-in-out infinite;
+}
+
+.cat-body {
+    background: #f3d4ff;
+    border: 3px solid #6c4bc4;
+    border-radius: 50% 50% 45% 45%;
+    padding: 15px 10px;
+    text-align: center;
+    font-size: 42px;
+    box-shadow: 0 8px 20px rgba(60,40,100,0.2);
+}
+
+.cat-message {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    width: 240px;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+    display: none;
+    font-size: 14px;
+}
+
+.cat-guide:hover .cat-message {
+    display: block;
+}
+
+/* =========================================================
+   LEARNING PATH
+========================================================= */
+
+.learning-path {
+    background: #eee8ff;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.step {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    transition: 0.4s;
+}
+
+.step:hover {
+    transform: scale(1.04);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: auto auto 15px;
+    background: #6c4bc4;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* =========================================================
+   LABORATOR
+========================================================= */
+
+.lab-section {
+    background: #1a1530;
+    color: white;
+    border-radius: 30px;
+    margin: 50px 6%;
+    padding: 60px 30px;
+}
+
+.lab-section h2 {
+    color: white;
+}
+
+.lab-section .section-desc {
+    color: #b3a7d6;
+}
+
+.lab {
+[28.09.2026 21:02] Yoma: display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.lab-buttons {
+    max-width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.tool-btn {
+    background: #2d2552;
+    color: white;
+    border: 2px solid #6c4bc4;
+    padding: 15px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tool-btn:hover,
+.tool-btn.active {
+    background: #6c4bc4;
+    transform: translateY(-5px);
+}
+
+.lab-display {
+    width: 420px;
+    min-height: 280px;
+    background: #251f42;
+    border-radius: 25px;
+    padding: 35px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    animation: glow 3s infinite;
+}
+
+.lab-icon {
+    font-size: 65px;
+    margin-bottom: 15px;
+}
+
+/* =========================================================
+   FAKE NEWS GAME
+========================================================= */
+
+.fake-news {
+    background: linear-gradient(135deg,#f9d9ec,#eee8ff);
+}
+
+.news-card {
+    max-width: 700px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(40,30,70,0.12);
+}
+
+.news-image {
+    height: 170px;
+    border-radius: 18px;
+    background: linear-gradient(135deg,#6c4bc4,#d9c7ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
+.news-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.news-buttons button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #eee8ff;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.news-buttons button:hover {
+    background: #c9a7ff;
+}
+
+/* =========================================================
+   COPYRIGHT
+========================================================= */
+
+.copyright-box {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.copyright-item {
+    background: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(40,30,70,0.1);
+    transition: 0.3s;
+}
+
+.copyright-item:hover {
+    transform: translateX(8px);
+}
+
+.copyright-answer {
+    display: none;
+    margin-top: 12px;
+    color: #524b70;
+}
+
+/* =========================================================
+   AI SECTION
+========================================================= */
+
+.ai-section {
+    background: #211b3d;
+    color: white;
+}
+
+.ai-section h2 {
+    color: white;
+}
+
+.ai-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.ai-card {
+    background: #2d2552;
+    border: 1px solid #6c4bc4;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.4s;
+}
+
+.ai-card:hover {
+    transform: translateY(-10px);
+    background: #3d326c;
+}
+
+/* =========================================================
+   SCENARIU
+========================================================= */
+
+.scenario {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    border-radius: 25px;
+    padding: 35px;
+    box-shadow: 0 8px 25px rgba(40,30,70,0.12);
+}
+
+.scenario-option {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+    background: #f5f3ff;
+    border: 2px solid #d9c7ff;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.scenario-option:hover {
+    background: #e9e0ff;
+    transform: translateX(5px);
+}
+
+#scenarioResult {
+    margin-top: 20px;
+    padding: 20px;
+    background: #eee8ff;
+    border-radius: 15px;
+    display: none;
+}
+
+/* =========================================================
+   GALERIE
+========================================================= */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.art {
+    height: 230px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+[28.09.2026 21:02] Yoma: align-items: center;
+    font-size: 80px;
+    background: linear-gradient(135deg,#d9c7ff,#f9d9ec);
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 8px 25px rgba(40,30,70,0.12);
+}
+
+.art:hover {
+    transform: rotate(3deg) scale(1.06);
+}
+
+/* =========================================================
+   RESPONSABILITATE
+========================================================= */
+
+.responsibility {
+    background: #eee8ff;
+}
+
+.resp-list {
+    max-width: 850px;
+    margin: 40px auto;
+    list-style: none;
+}
+
+.resp-list li {
+    background: white;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(40,30,70,0.08);
+    transition: 0.3s;
+}
+
+.resp-list li:hover {
+    transform: translateX(10px);
+}
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+.quiz {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 8px 30px rgba(40,30,70,0.12);
+}
+
+.quiz-question {
+    margin-bottom: 35px;
+}
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 12px;
+    border: 2px solid #d9c7ff;
+    background: #f5f3ff;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.quiz-option:hover {
+    background: #e9e0ff;
+}
+
+.quiz-option.correct {
+    background: #d1fae5;
+    border-color: #10b981;
+}
+
+.quiz-option.wrong {
+    background: #fee2e2;
+    border-color: #ef4444;
+}
+
+#quizScore {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    background: #211b3d;
+    color: white;
+    text-align: center;
+    padding: 35px;
+}
+
+/* =========================================================
+   TOP BUTTON
+========================================================= */
+
+#topButton {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: #6c4bc4;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 2000;
+}
+
+#topButton.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px) {
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        justify-content: center;
+    }
+
+    .cat-guide {
+        right: 10px;
+        bottom: 80px;
+        transform: scale(0.8);
+    }
+
+    .news-buttons {
+        flex-direction: column;
+    }
+
+}
+
+</style>
 </head>
+
 <body>
 
-    <!-- BARĂ PROGRES LECTURĂ -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
+<!-- BACKGROUND -->
 
-    <!-- MENIU DE NAVIGARE -->
-    <header>
-        <nav>
-            <div class="logo">🎨 Cultura Informațională</div>
-            <ul class="nav-links">
-                <li><a href="#despre">Despre</a></li>
-                <li><a href="#laborator">Panou Interactiv</a></li>
-                <li><a href="#concepte">Concepte 3D</a></li>
-                <li><a href="#responsabilitate">Responsabilitate</a></li>
-                <li><a href="#quiz">Test/Quiz</a></li>
-            </ul>
-        </nav>
-    </header>
+<div class="background-shapes">
+    <div class="shape one"></div>
+    <div class="shape two"></div>
+    <div class="shape three"></div>
+</div>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Cultura informațională și rolul unui artist</h1>
-            <p>Cum informația, arta și tehnologia se întâlnesc în societatea digitală.</p>
-            <a href="#despre" class="button">Explorează mai jos ↓</a>
-        </div>
-    </section>
+<!-- PROGRESS -->
 
-    <!-- DESPRE -->
-    <section id="despre">
-        <h2>Ce este cultura informațională?</h2>
-        <p class="section-desc">Capacitatea unei persoane de a găsi, înțelege, analiza și utiliza informația într-un mod etic și responsabil.</p>
-    </section>
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
 
-    <!-- PANOUL INTERACTIV: LABORATORUL ARTISTULUI DIGITAL -->
-    <div class="interactive-panel-section" id="laborator">
-        <div style="text-align: center;">
-            <span class="hint-badge">💡 Apasă pe elementele de mai jos!</span>
-            <h2>Studio-ul Virtual al Artistului</h2>
-            <p class="section-desc">Interacționează cu instrumentele pentru a descoperi din ce constă activitatea digitală.</p>
-        </div>
+<!-- HEADER -->
 
-        <div class="lab-container">
-            <div class="lab-tools">
-                <button class="tool-btn active" onclick="selectTool('pensula', this)">
-                    <span>🖌️</span> Pensula Digitală
-                </button>
-                <button class="tool-btn" onclick="selectTool('paleta', this)">
-                    <span>🎨</span> Paleta de Culori
-                </button>
-                <button class="tool-btn" onclick="selectTool('layer', this)">
-                    <span>📚</span> Straturile (Layers)
-                </button>
-                <button class="tool-btn" onclick="selectTool('lumina', this)">
-                    <span>💡</span> Umbra și Lumina
-                </button>
-            </div>
+<header>
 
-            <div class="lab-display">
-                <div class="lab-icon-preview" id="labIcon">🖌️</div>
-                <h3 id="labTitle" style="color: #c9a7ff; margin-bottom: 10px;">Pensula Digitală</h3>
-                <p id="labDesc" style="color: #d1d5db; font-size: 15px;">Permite simularea picturii tradiționale (acuarelă, ulei) cu precizie matematică și flexibilitate infinită.</p>
-            </div>
-        </div>
-    </div>
+<nav>
 
-    <!-- CARDURI 3D INTERACTIVE -->
-    <section id="concepte">
-        <div style="text-align: center;">
-            <span class="hint-badge">👆 Treci cu mouse-ul sau apasă pe card!</span>
-            <h2>Concepte Cheie în Artă și Informație</h2>
-        </div>
+<div class="logo">
+🎨 Cultura Informațională
+</div>
 
-        <div class="cards-3d">
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-[28.09.2026 20:50] Yoma: <div style="font-size: 40px;">🔎</div>
-                        <h3>Fake News & Artă</h3>
-                        <p style="font-size: 13px; color: #666; margin-top: 10px;">Apasă pentru detalii</p>
-                    </div>
-                    <div class="flip-card-back">
-                        <h3>Manipulare Vizuală</h3>
-                        <p>Artiștii au responsabilitatea de a nu folosi imagini modificate pentru a dezinforma sau a crea știri false.</p>
-                    </div>
-                </div>
-            </div>
+<ul class="nav-links">
 
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div style="font-size: 40px;">📜</div>
-                        <h3>Drepturi de Autor</h3>
-                        <p style="font-size: 13px; color: #666; margin-top: 10px;">Apasă pentru detalii</p>
-                    </div>
-                    <div class="flip-card-back">
-                        <h3>Copyright Digital</h3>
-                        <p>Protejarea lucrărilor proprii și respectarea muncii altor creatori prin atribuirea corectă a sursei.</p>
-                    </div>
-                </div>
-            </div>
+<li><a href="#despre">Despre</a></li>
+<li><a href="#exploreaza">Explorează</a></li>
+<li><a href="#laborator">Laborator</a></li>
+<li><a href="#fake-news">Fake News</a></li>
+<li><a href="#copyright">Copyright</a></li>
+<li><a href="#ai">AI</a></li>
+<li><a href="#quiz">Quiz</a></li>
 
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div style="font-size: 40px;">🤖</div>
-                        <h3>Artă & AI</h3>
-                        <p style="font-size: 13px; color: #666; margin-top: 10px;">Apasă pentru detalii</p>
-                    </div>
-                    <div class="flip-card-back">
-                        <h3>Inteligența Artificială</h3>
-                        <p>Utilizarea AI ca un instrument suplimentar de inspirație, menținând totodată amprenta creativă umană.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</ul>
 
-    <!-- RESPONSABILITATE -->
-    <section id="responsabilitate" class="important">
-        <h2>Responsabilitatea artistului digital</h2>
-        <ul class="resp-list">
-            <li><span>🎨</span> Create de lucrări originale și respectarea licențelor de utilizare.</li>
-            <li><span>🔎</span> Verificarea surselor din care se inspiră înainte de a distribui un mesaj.</li>
-            <li><span>💬</span> Promovarea valorilor pozitive și stimularea gândirii critice la public.</li>
-        </ul>
-    </section>
+</nav>
 
-    <!-- QUIZ INTERACTIV -->
-    <section id="quiz">
-        <div class="quiz-section">
-            <div style="text-align: center;">
-                <span class="hint-badge">🎮 Mini-Test</span>
-                <h2>Testează-ți cunoștințele!</h2>
-            </div>
+</header>
 
-            <div id="quizContainer">
-                <p style="font-size: 18px; font-weight: bold; margin-bottom: 15px;" id="questionText">
-                    1. Ce înseamnă să verifici o sursă de informație?
-                </p>
-                <div id="optionsContainer">
-                    <button class="quiz-option" onclick="checkAnswer(this, false)">A) Să o distribui imediat prietenilor</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, true)">B) Să controlezi dacă este credibilă și reală</button>
-                    <button class="quiz-option" onclick="checkAnswer(this, false)">C) Să o ștergi din calculator</button>
-                </div>
-            </div>
 
-            <div class="quiz-result" id="quizResult"></div>
-        </div>
-    </section>
+<!-- PISICUȚA -->
 
-    <!-- FOOTER -->
-    <footer>
-        <p>© 2026 — Cultura informațională și rolul artistului</p>
-    </footer>
+<div class="cat-guide">
 
-    <!-- BUTON SCROLL SUS -->
-    <button id="topButton" onclick="scrollToTop()">↑</button>
+<div class="cat-body">
+🐱
+</div>
 
-    <!-- JAVASCRIPT INTERACTIV -->
-    <script>
-        // 1. BARĂ DE PROGRES LA SCROLL
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.
-[28.09.2026 20:50] Yoma: documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
+<div class="cat-message">
 
-            // Control buton Scroll Sus
-            const topButton = document.getElementById("topButton");
-            if (winScroll > 300) {
-                topButton.classList.add("show");
-            } else {
-                topButton.classList.remove("show");
-            }
-        };
+<strong>Salut! Eu sunt Mia! 🐾</strong>
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+<br><br>
 
-        // 2. PANOUL INTERACTIV (LABORATOR ARTIST)
-        const toolData = {
-            pensula: {
-                icon: "🖌️",
-                title: "Pensula Digitală",
-                desc: "Instrumentul principal de desen. Permite ajustarea opacității, grosimii și finisajelor pentru a crea texture unice."
-            },
-            paleta: {
-                icon: "🎨",
-                title: "Paleta de Culori",
-                desc: "Constă în teorii ale culorilor (RGB, CMYK) și armonii vizuale care influențează direct starea de spirit a privitorului."
-            },
-            layer: {
-                icon: "📚",
-                title: "Straturile (Layers)",
-                desc: "Permit separarea elementelor grafice (fundal, personaje, text) pentru o editare independentă și fără riscuri."
-            },
-            lumina: {
-                icon: "💡",
-                title: "Umbra și Lumina",
-                desc: "Adaugă profunzime 3D și volum creației vizuale, ghidând atenția privitorului către punctul de interes."
-            }
-        };
+Te voi ajuta să explorezi site-ul.
 
-        function selectTool(toolKey, btnElement) {
-            // Elimina clasa active de la toate butoanele
-            document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
+Apasă pe elementele interactive și încearcă activitățile!
 
-            const data = toolData[toolKey];
-            const iconEl = document.getElementById('labIcon');
+</div>
 
-            // Animație de Pop pe pictogramă
-            iconEl.classList.remove('animate-pop');
-            void iconEl.offsetWidth; // Trigger reflow
-            iconEl.classList.add('animate-pop');
+</div>
 
-            iconEl.innerText = data.icon;
-            document.getElementById('labTitle').innerText = data.title;
-            document.getElementById('labDesc').innerText = data.desc;
-        }
 
-        // 3. QUIZ INTERACTIV
-        function checkAnswer(button, isCorrect) {
-            const options = document.querySelectorAll('.quiz-option');
-            options.forEach(opt => opt.disabled = true);
+<!-- HERO -->
 
-            const resultDiv = document.getElementById('quizResult');
+<section class="hero">
 
-            if(isCorrect) {
-                button.classList.add('correct');
-                resultDiv.style.display = 'block';
-                resultDiv.style.background = '#d1fae5';
-                resultDiv.style.color = '#065f46';
-                resultDiv.innerHTML = "🎉 Corect! Cultura informațională presupune verificarea atentă a surselor.";
-            } else {
-                button.classList.add('wrong');
-                resultDiv.style.display = 'block';
-                resultDiv.style.background = '#fee2e2';
-                resultDiv.style.color = '#991b1b';
-                resultDiv.innerHTML = "❌ Incorect! Răspunsul corect era B (Verificarea credibilității).";
-            }
-        }
-    </script>
+<div class="hero-content">
+
+<h1>
+Cultura informațională și rolul artistului
+</h1>
+
+<p>
+Descoperă cum informația, arta și tehnologia se întâlnesc în lumea digitală.
+[28.09.2026 21:02] Yoma: Învață prin explorare, jocuri și activități interactive.
+</p>
+
+<a href="#despre" class="button">
+Începe aventura ✨
+</a>
+
+</div>
+
+</section>
+
+
+<!-- DESPRE -->
+
+<section id="despre">
+
+<h2>
+Ce este cultura informațională?
+</h2>
+
+<p class="section-desc">
+
+Cultura informațională reprezintă capacitatea de a găsi,
+înțelege, verifica, analiza și utiliza informația într-un mod
+corect, responsabil și etic.
+
+</p>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<div class="icon">🔎</div>
+
+<h3>Căutarea</h3>
+
+<p>
+Să știm unde și cum să găsim informații relevante.
+</p>
+
+</div>
+
+
+<div class="info-card">
+
+<div class="icon">🧠</div>
+
+<h3>Analiza</h3>
+
+<p>
+Să putem diferenția informația corectă de cea falsă.
+</p>
+
+</div>
+
+
+<div class="info-card">
+
+<div class="icon">💡</div>
+
+<h3>Înțelegerea</h3>
+
+<p>
+Să interpretăm informația și să înțelegem contextul.
+</p>
+
+</div>
+
+
+<div class="info-card">
+
+<div class="icon">⚖️</div>
+
+<h3>Responsabilitatea</h3>
+
+<p>
+Să folosim și distribuim informația în mod etic.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TRASEU -->
+
+<section id="exploreaza" class="learning-path">
+
+<h2>
+🧭 Traseul unui utilizator informat
+</h2>
+
+<p class="section-desc">
+
+Urmează pașii pentru a înțelege cum trebuie abordată o informație nouă.
+
+</p>
+
+<div class="steps">
+
+<div class="step">
+
+<div class="step-number">1</div>
+
+<h3>Găsește</h3>
+
+<p>
+Caută informația din mai multe surse.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">2</div>
+
+<h3>Verifică</h3>
+
+<p>
+Analizează autorul, data și sursa.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">3</div>
+
+<h3>Compară</h3>
+
+<p>
+Compară informația cu alte surse.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">4</div>
+
+<h3>Folosește</h3>
+
+<p>
+Utilizează informația responsabil.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LABORATOR -->
+
+<section id="laborator" class="lab-section">
+
+<h2>
+🎨 Studio-ul virtual al artistului
+</h2>
+
+<p class="section-desc">
+
+Apasă pe fiecare instrument și descoperă cum contribuie
+tehnologia la procesul artistic.
+
+</p>
+
+<div class="lab">
+
+<div class="lab-buttons">
+
+<button class="tool-btn active"
+onclick="changeTool('brush',this)">
+🖌️ Pensula
+</button>
+
+<button class="tool-btn"
+onclick="changeTool('color',this)">
+🎨 Culori
+</button>
+
+<button class="tool-btn"
+onclick="changeTool('layers',this)">
+📚 Layers
+</button>
+
+<button class="tool-btn"
+onclick="changeTool('light',this)">
+💡 Lumină
+</button>
+
+<button class="tool-btn"
+onclick="changeTool('reference',this)">
+🖼️ Referință
+</button>
+
+</div>
+
+
+<div class="lab-display">
+
+<div class="lab-icon" id="labIcon">
+🖌️
+</div>
+
+<h3 id="labTitle">
+Pensula digitală
+</h3>
+
+<p id="labText">
+
+Pensula digitală permite artistului să creeze linii,
+texturi și forme folosind diferite setări.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FAKE NEWS -->
+
+<section id="fake-news" class="fake-news">
+
+<h2>
+🔍 Detectivul informațional
+</h2>
+
+<p class="section-desc">
+
+Imaginează-ți că ai primit această postare.
+Tu trebuie să decizi dacă informația pare credibilă.
+
+</p>
+
+<div class="news-card">
+
+<div class="news-image">
+📰
+</div>
+
+<h3>
+„Un artist a creat o imagine virală folosind o aplicație.
+Imaginea reprezintă un eveniment real.”
+</h3>
+
+<p style="margin-top:15px">
+
+Postarea nu oferă autorul imaginii, sursa originală,
+data fotografiei sau alte dovezi.
+
+</p>
+
+<div class="news-buttons">
+
+<button onclick="checkNews(false)">
+❌ Aș distribui-o
+</button>
+
+<button onclick="checkNews(true)">
+🔎 Aș verifica sursa
+</button>
+
+</div>
+
+<p id="newsResult"
+style="margin-top:20px;font-weight:bold;">
+</p>
+
+</div>
+
+</section>
+
+
+<!-- COPYRIGHT -->
+
+<section id="copyright">
+
+<h2>
+©️ Drepturile de autor în artă
+</h2>
+
+<p class="section-desc">
+
+Un artist trebuie să respecte atât propria muncă,
+cât și munca altor creatori.
+
+Apasă pe situații pentru a vedea explicația.
+
+</p>
+
+<div class="copyright-box">
+
+<div class="copyright-item"
+onclick="toggleCopyright(0)">
+
+<strong>🎨 Pot folosi orice imagine găsită pe Internet?</strong>
+
+<p class="copyright-answer">
+Nu întotdeauna. Unele imagini sunt protejate prin drepturi de autor.
+[28.09.2026 21:02] Yoma: Trebuie verificată licența și condițiile de utilizare.
+</p>
+
+</div>
+
+
+<div class="copyright-item"
+onclick="toggleCopyright(1)">
+
+<strong>✍️ Pot folosi o lucrare ca inspirație?</strong>
+
+<p class="copyright-answer">
+Inspirația este normală în procesul artistic, însă copierea unei
+lucrări fără permisiune sau fără atribuire poate încălca drepturile creatorului.
+</p>
+
+</div>
+
+
+<div class="copyright-item"
+onclick="toggleCopyright(2)">
+
+<strong>🔗 De ce este importantă menționarea sursei?</strong>
+
+<p class="copyright-answer">
+Menționarea sursei ajută publicul să identifice creatorul
+și arată respect pentru munca acestuia.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- AI -->
+
+<section id="ai" class="ai-section">
+
+<h2>
+🤖 Artistul și Inteligența Artificială
+</h2>
+
+<p class="section-desc">
+
+AI poate deveni un instrument în procesul creativ.
+Important este să înțelegem cum îl folosim și ce informații
+prezentăm publicului.
+
+</p>
+
+<div class="ai-grid">
+
+<div class="ai-card">
+
+<h3>💡 Inspirație</h3>
+
+<p>
+AI poate ajuta la generarea unor idei,
+forme sau direcții vizuale.
+</p>
+
+</div>
+
+
+<div class="ai-card">
+
+<h3>🧩 Instrument</h3>
+
+<p>
+Poate fi folosit ca parte a unui proces creativ,
+alături de alte instrumente digitale.
+</p>
+
+</div>
+
+
+<div class="ai-card">
+
+<h3>🔎 Verificare</h3>
+
+<p>
+Conținutul generat trebuie analizat înainte de a fi prezentat
+ca informație reală.
+</p>
+
+</div>
+
+
+<div class="ai-card">
+
+<h3>⚖️ Responsabilitate</h3>
+
+<p>
+Artistul trebuie să fie atent la surse,
+drepturi și modul în care prezintă lucrarea.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SCENARIU -->
+
+<section>
+
+<h2>
+🎮 Ce ai face dacă ai fi artistul?
+</h2>
+
+<p class="section-desc">
+
+Alege o acțiune și vezi ce principiu al culturii informaționale
+este implicat.
+
+</p>
+
+<div class="scenario">
+
+<h3>
+Ai găsit o imagine foarte interesantă pe Internet.
+Vrei să o folosești într-un proiect.
+Ce faci?
+</h3>
+
+<button class="scenario-option"
+onclick="scenarioAnswer(1)">
+A. O descarc și o folosesc imediat.
+</button>
+
+<button class="scenario-option"
+onclick="scenarioAnswer(2)">
+B. Verific autorul și licența.
+</button>
+
+<button class="scenario-option"
+onclick="scenarioAnswer(3)">
+C. O modific puțin și nu mai verific nimic.
+</button>
+
+<div id="scenarioResult"></div>
+
+</div>
+
+</section>
+
+
+<!-- GALERIE -->
+
+<section>
+
+<h2>
+🖼️ Galeria ideilor digitale
+</h2>
+
+<p class="section-desc">
+
+Apasă pe fiecare creație pentru a descoperi legătura
+dintre artă și tehnologie.
+
+</p>
+
+<div class="gallery">
+
+<div class="art" onclick="artInfo('🎨 Arta digitală poate combina desenul tradițional cu instrumentele digitale.')">
+🎨
+</div>
+
+<div class="art" onclick="artInfo('🧊 Modelarea 3D permite crearea unor obiecte și personaje tridimensionale.')">
+🧊
+</div>
+
+<div class="art" onclick="artInfo('🎮 Game Design combină arta, tehnologia, povestirea și interacțiunea.')">
+🎮
+</div>
+
+<div class="art" onclick="artInfo('✨ Animația transformă imaginile statice într-o experiență vizuală dinamică.')">
+✨
+</div>
+
+</div>
+
+<p id="artInfo"
+style="text-align:center;margin-top:25px;font-weight:bold;color:#493580;">
+</p>
+
+</section>
+
+
+<!-- RESPONSABILITATE -->
+
+<section class="responsibility">
+
+<h2>
+⚖️ Responsabilitatea artistului digital
+</h2>
+
+<ul class="resp-list">
+
+<li>
+🎨 <strong>Originalitate:</strong>
+crearea și prezentarea lucrărilor într-un mod corect.
+</li>
+
+<li>
+🔎 <strong>Verificarea informației:</strong>
+sursele trebuie analizate înainte de distribuire.
+</li>
+
+<li>
+©️ <strong>Respectarea creatorilor:</strong>
+drepturile de autor trebuie luate în considerare.
+</li>
+
+<li>
+💬 <strong>Comunicarea:</strong>
+imaginile pot influența modul în care publicul percepe un mesaj.
+</li>
+
+<li>
+🤖 <strong>Utilizarea responsabilă a tehnologiei:</strong>
+instrumentele digitale trebuie folosite conștient.
+</li>
+
+</ul>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section id="quiz">
+
+<div class="quiz">
+
+<h2>
+🧠 Test final
+</h2>
+
+<p class="section-desc">
+Vezi cât ai reținut din explorarea site-ului!
+</p>
+
+<div class="quiz-question">
+
+<h3>
+1. Ce trebuie făcut înainte de a distribui o informație?
+</h3>
+
+<button class="quiz-option"
+[28.09.2026 21:02] Yoma: onclick="quizAnswer(this,true)">
+A. Verificarea sursei
+</button>
+
+<button class="quiz-option"
+onclick="quizAnswer(this,false)">
+B. Distribuirea imediată
+</button>
+
+<button class="quiz-option"
+onclick="quizAnswer(this,false)">
+C. Ignorarea autorului
+</button>
+
+</div>
+
+
+<div class="quiz-question">
+
+<h3>
+2. Ce este important când folosim imaginea altui artist?
+</h3>
+
+<button class="quiz-option"
+onclick="quizAnswer(this,true)">
+A. Verificarea drepturilor și licenței
+</button>
+
+<button class="quiz-option"
+onclick="quizAnswer(this,false)">
+B. Să eliminăm numele artistului
+</button>
+
+<button class="quiz-option"
+onclick="quizAnswer(this,false)">
+C. Să spunem că este lucrarea noastră
+</button>
+
+</div>
+
+
+<div class="quiz-question">
+
+<h3>
+3. Ce poate face un artist digital?
+</h3>
+
+<button class="quiz-option"
+onclick="quizAnswer(this,true)">
+A. Să combine creativitatea cu instrumentele digitale
+</button>
+
+<button class="quiz-option"
+onclick="quizAnswer(this,false)">
+B. Să ignore sursele
+</button>
+
+<button class="quiz-option"
+onclick="quizAnswer(this,false)">
+C. Să distribuie orice informație
+</button>
+
+</div>
+
+<div id="quizScore">
+Scor: 0
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+🐾 Mia îți mulțumește că ai explorat site-ul!
+</p>
+
+<p style="margin-top:10px;">
+© 2026 — Cultura informațională și rolul artistului
+</p>
+
+</footer>
+
+
+<!-- TOP -->
+
+<button id="topButton"
+onclick="scrollToTop()">
+↑
+</button>
+
+
+<script>
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+window.addEventListener("scroll", function(){
+
+let scrollTop =
+document.documentElement.scrollTop;
+
+let height =
+document.documentElement.scrollHeight -
+document.documentElement.clientHeight;
+
+let progress =
+(scrollTop / height) * 100;
+
+document.getElementById("progressBar")
+.style.width = progress + "%";
+
+
+const topButton =
+document.getElementById("topButton");
+
+if(scrollTop > 500){
+
+topButton.classList.add("show");
+
+}else{
+
+topButton.classList.remove("show");
+
+}
+
+});
+
+
+function scrollToTop(){
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}
+
+
+/* =========================================================
+   LABORATOR
+========================================================= */
+
+const tools = {
+
+brush: {
+
+icon:"🖌️",
+
+title:"Pensula digitală",
+
+text:"Pensula permite artistului să creeze linii, texturi și forme. Setările precum grosimea și opacitatea oferă control asupra rezultatului."
+
+},
+
+color: {
+
+icon:"🎨",
+
+title:"Paleta de culori",
+
+text:"Culorile pot transmite emoții și pot influența modul în care privitorul percepe o imagine."
+
+},
+
+layers: {
+
+icon:"📚",
+
+title:"Straturile",
+
+text:"Layers permit separarea personajelor, fundalului, umbrelor și altor elemente pentru editare mai ușoară."
+
+},
+
+light: {
+
+icon:"💡",
+
+title:"Lumina și umbra",
+
+text:"Lumina și umbra pot crea volum, profunzime și pot direcționa atenția către anumite elemente."
+
+},
+
+reference: {
+
+icon:"🖼️",
+
+title:"Imaginea de referință",
+
+text:"Referințele pot ajuta artistul să înțeleagă anatomia, perspectiva, iluminarea și obiectele."
+
+}
+
+};
+
+
+function changeTool(key,button){
+
+document
+.querySelectorAll(".tool-btn")
+.forEach(btn =>
+btn.classList.remove("active")
+);
+
+button.classList.add("active");
+
+let data = tools[key];
+
+document.getElementById("labIcon")
+.innerText = data.icon;
+
+document.getElementById("labTitle")
+.innerText = data.title;
+
+document.getElementById("labText")
+.innerText = data.text;
+
+}
+
+
+/* =========================================================
+   FAKE NEWS
+========================================================= */
+
+function checkNews(correct){
+
+let result =
+document.getElementById("newsResult");
+
+if(correct){
+
+result.innerHTML =
+"✅ Corect! Înainte de distribuire este important să verificăm sursa, autorul, data și contextul informației.";
+
+result.style.color="#065f46";
+
+}else{
+
+result.innerHTML =
+"⚠️ Mai întâi verifică informația. O imagine sau o postare virală nu reprezintă automat o dovadă.";
+
+result.style.color="#991b1b";
+
+}
+
+}
+[28.09.2026 21:02] Yoma: /* =========================================================
+   COPYRIGHT
+========================================================= */
+
+function toggleCopyright(index){
+
+let answers =
+document.querySelectorAll(".copyright-answer");
+
+answers[index].style.display =
+answers[index].style.display === "block"
+? "none"
+: "block";
+
+}
+
+
+/* =========================================================
+   SCENARIU
+========================================================= */
+
+function scenarioAnswer(answer){
+
+let result =
+document.getElementById("scenarioResult");
+
+result.style.display="block";
+
+if(answer === 2){
+
+result.innerHTML =
+"🎉 Alegerea ta respectă cultura informațională. Verificarea autorului și a licenței te ajută să respecți drepturile creatorului.";
+
+}else{
+
+result.innerHTML =
+"💡 Înainte de utilizare este recomandat să verifici autorul și condițiile de utilizare ale imaginii.";
+
+}
+
+}
+
+
+/* =========================================================
+   GALERIE
+========================================================= */
+
+function artInfo(text){
+
+document.getElementById("artInfo")
+.innerText=text;
+
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+let score = 0;
+
+function quizAnswer(button, correct){
+
+if(button.classList.contains("answered")){
+return;
+}
+
+button.classList.add("answered");
+
+if(correct){
+
+button.classList.add("correct");
+
+score++;
+
+}else{
+
+button.classList.add("wrong");
+
+}
+
+document.getElementById("quizScore")
+.innerText =
+"Scor: " + score;
+
+}
+
+
+/* =========================================================
+   CAT
+========================================================= */
+
+const cat =
+document.querySelector(".cat-guide");
+
+cat.addEventListener("click",function(){
+
+const messages = [
+
+"🐱 Bravo! Continuă să explorezi!",
+
+"🐾 Nu uita să verifici sursele!",
+
+"🎨 Arta și informația sunt strâns legate!",
+
+"🔎 Încearcă activitatea Fake News!",
+
+"🤖 Ai ajuns la secțiunea despre AI!",
+
+"✨ Mai ai puțin până la quiz!"
+
+];
+
+let random =
+messages[Math.floor(Math.random()*messages.length)];
+
+alert(random);
+
+});
+
+</script>
+
 </body>
 </html>
