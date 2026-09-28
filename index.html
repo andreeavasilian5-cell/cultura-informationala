@@ -34,8 +34,7 @@ body:before{
     inset:0;
     pointer-events:none;
     z-index:-2;
-    background-image:
-      radial-gradient(circle,rgba(108,75,196,.10) 1px,transparent 1px);
+    background-image:radial-gradient(circle,rgba(108,75,196,.10) 1px,transparent 1px);
     background-size:28px 28px;
 }
 
@@ -73,14 +72,8 @@ body:before{
 }
 
 @keyframes up{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
+    from{opacity:0;transform:translateY(40px)}
+    to{opacity:1;transform:none}
 }
 
 @keyframes pulse{
@@ -169,13 +162,7 @@ nav{
     padding:80px 20px;
     position:relative;
     overflow:hidden;
-    background:
-        linear-gradient(
-            135deg,
-            #d9c7ff,
-            #f9d9ec,
-            #d9c7ff
-        );
+    background:linear-gradient(135deg,#d9c7ff,#f9d9ec,#d9c7ff);
     background-size:300% 300%;
     animation:gradient 12s ease infinite;
 }
@@ -236,9 +223,11 @@ h1{
     margin:0 auto 30px;
 }
 
+/* BUTOANE */
+
 .btn{
     border:0;
-[28.09.2026 21:12] Yoma: display:inline-flex;
+    display:inline-flex;
     align-items:center;
     justify-content:center;
     gap:8px;
@@ -256,6 +245,11 @@ h1{
 .btn:hover{
     background:#51349c;
     transform:translateY(-4px) scale(1.03);
+}
+
+.btn.small{
+    padding:10px 20px;
+    font-size:14px;
 }
 
 /* SECTIUNI */
@@ -366,10 +360,6 @@ section h2{
 
 /* CARTI 3D */
 
-.book-zone{
-    perspective:1200px;
-}
-
 .books{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -386,8 +376,7 @@ section h2{
     position:relative;
     width:100%;
     height:100%;
-    transition:
-        transform .75s cubic-bezier(.2,.8,.2,1);
+    transition:transform .75s cubic-bezier(.2,.8,.2,1);
     transform-style:preserve-3d;
 }
 
@@ -491,7 +480,7 @@ section h2{
 }
 
 .display{
-[28.09.2026 21:12] Yoma: min-height:330px;
+    min-height:330px;
     background:#251f42;
     border:1px solid #493f76;
     border-radius:25px;
@@ -623,6 +612,11 @@ input[type=range]{
     transform:translateY(-3px);
 }
 
+.evidence button.active-e{
+    background:#e9e0ff;
+    border-color:#a777e3;
+}
+
 .result{
     margin-top:20px;
     padding:18px;
@@ -656,6 +650,11 @@ input[type=range]{
 .choice:hover{
     transform:translateX(7px);
     background:#e9e0ff;
+}
+
+.choice.selected{
+    background:#e9e0ff;
+    border-color:#a777e3;
 }
 
 .feedback{
@@ -701,10 +700,6 @@ input[type=range]{
 
 /* RESPONSABILITATE */
 
-.resp{
-    background:#eee8ff;
-}
-
 .resp-list{
     max-width:850px;
     margin:auto;
@@ -740,7 +735,7 @@ input[type=range]{
     border-bottom:1px solid #eee;
 }
 
-.q:last-child{
+.q:last-of-type{
     border-bottom:0;
 }
 
@@ -757,8 +752,12 @@ input[type=range]{
     transition:.25s;
 }
 
-.q button:hover{
+.q button:not(:disabled):hover{
     background:#e9e0ff;
+}
+
+.q button:disabled{
+    cursor:default;
 }
 
 .q button.correct{
@@ -766,8 +765,7 @@ input[type=range]{
     border-color:#10b981;
 }
 
-.q button.
-[28.09.2026 21:12] Yoma: wrong{
+.q button.wrong{
     background:#fee2e2;
     border-color:#ef4444;
 }
@@ -778,6 +776,15 @@ input[type=range]{
     font-size:23px;
     font-weight:bold;
     color:#493580;
+}
+
+#quizFinal{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+    border-radius:16px;
+    background:#eee8ff;
+    text-align:center;
 }
 
 /* PISICA */
@@ -793,7 +800,8 @@ input[type=range]{
     animation:catFloat 3.2s ease-in-out infinite;
 }
 
-.cat-guide img{
+.cat-guide img,
+.cat-guide svg{
     width:100%;
     display:block;
     border-radius:50%;
@@ -802,7 +810,8 @@ input[type=range]{
     transition:.35s;
 }
 
-.cat-guide:hover img{
+.cat-guide:hover img,
+.cat-guide:hover svg{
     transform:scale(1.06) rotate(2deg);
 }
 
@@ -837,8 +846,8 @@ input[type=range]{
 
 #top{
     position:fixed;
-    right:25px;
-    bottom:25px;
+    right:35px;
+    bottom:200px;
     width:50px;
     height:50px;
     border:0;
@@ -905,6 +914,11 @@ footer{
         right:105%;
         width:210px;
     }
+
+    #top{
+        right:30px;
+        bottom:140px;
+    }
 }
 </style>
 </head>
@@ -937,44 +951,24 @@ footer{
 </nav>
 </header>
 
-
 <!-- HERO -->
-
 <section class="hero">
-
 <div class="hero-content">
-
-<span class="badge">
-💡 Site interactiv
-</span>
-
-<h1>
-Cultura informațională<br>
-și rolul artistului
-</h1>
-
+<span class="badge">💡 Site interactiv</span>
+<h1>Cultura informațională<br>și rolul artistului</h1>
 <p>
 Descoperă prin jocuri, animații și experimente
 cum informația, arta și tehnologia se întâlnesc
 în lumea digitală.
 </p>
-
-<a class="btn" href="#despre">
-🚀 Începe explorarea
-</a>
-
+<a class="btn" href="#despre">🚀 Începe explorarea</a>
 </div>
-
 </section>
 
-
 <!-- DESPRE -->
-
 <section id="despre" class="reveal">
 
-<h2>
-🔎 Ce este cultura informațională?
-</h2>
+<h2>🔎 Ce este cultura informațională?</h2>
 
 <p class="desc">
 Cultura informațională reprezintă capacitatea de a găsi,
@@ -987,54 +981,37 @@ mod responsabil și etic.
 <div class="info-card">
 <div class="icon">🔎</div>
 <h3>Căutarea</h3>
-<p>
-Să știi unde să cauți informații și să identifici
-sursele relevante.
-</p>
+<p>Să știi unde să cauți informații și să identifici sursele relevante.</p>
 </div>
 
 <div class="info-card">
 <div class="icon">🧠</div>
 <h3>Analiza</h3>
-<p>
-Să compari informațiile și să observi dacă există
-dovezi care susțin afirmațiile.
-</p>
+<p>Să compari informațiile și să observi dacă există dovezi care susțin afirmațiile.</p>
 </div>
 
 <div class="info-card">
 <div class="icon">✅</div>
 <h3>Verificarea</h3>
-<p>
-Să verifici autorul, data, sursa și contextul
-înainte de a distribui ceva.
-</p>
+<p>Să verifici autorul, data, sursa și contextul înainte de a distribui ceva.</p>
 </div>
 
 <div class="info-card">
 <div class="icon">⚖️</div>
 <h3>Utilizarea responsabilă</h3>
-<p>
-Să folosești informația respectând creatorii,
-drepturile și publicul.
-</p>
+<p>Să folosești informația respectând creatorii, drepturile și publicul.</p>
 </div>
 
 </div>
-
 </section>
 
-
-<!-- CUM ÎNVAȚĂ UTILIZATORUL -->
-
+<!-- CUM VERIFICI -->
 <section class="learning reveal">
 
-<h2>
-🧭 Cum verifici o informație?
-</h2>
+<h2>🧭 Cum verifici o informație?</h2>
 
 <p class="desc">
-[28.09.2026 21:12] Yoma: Urmează pașii de mai jos atunci când întâlnești
+Urmează pașii de mai jos atunci când întâlnești
 o informație nouă pe Internet.
 </p>
 
@@ -1043,47 +1020,34 @@ o informație nouă pe Internet.
 <div class="step">
 <div class="num">1</div>
 <h3>Oprește-te</h3>
-<p>
-Nu distribui imediat informația.
-</p>
+<p>Nu distribui imediat informația.</p>
 </div>
 
 <div class="step">
 <div class="num">2</div>
 <h3>Identifică sursa</h3>
-<p>
-Cine a creat informația?
-</p>
+<p>Cine a creat informația?</p>
 </div>
 
 <div class="step">
 <div class="num">3</div>
 <h3>Caută dovezi</h3>
-<p>
-Vezi dacă există alte surse independente.
-</p>
+<p>Vezi dacă există alte surse independente.</p>
 </div>
 
 <div class="step">
 <div class="num">4</div>
 <h3>Verifică contextul</h3>
-<p>
-Când și unde a fost realizată informația?
-</p>
+<p>Când și unde a fost realizată informația?</p>
 </div>
 
 </div>
-
 </section>
 
-
 <!-- CARTI -->
-
 <section id="carti" class="reveal">
 
-<h2>
-📚 Cărțile cunoașterii
-</h2>
+<h2>📚 Cărțile cunoașterii</h2>
 
 <p class="desc">
 Apropie mouse-ul de fiecare carte sau apasă pe ea.
@@ -1092,311 +1056,124 @@ Cărțile se rotesc și ascund informații suplimentare.
 
 <div class="books">
 
-
-<div class="book"
-onclick="this.classList.toggle('open')">
-
+<div class="book" onclick="this.classList.toggle('open')">
 <div class="book-inner">
-
 <div class="book-face book-front">
-
-<div class="book-cover">
-🔎
-</div>
-
+<div class="book-cover">🔎</div>
 <h3>Informația</h3>
-
-<p>
-Ce trebuie să observi?
-</p>
-
+<p>Ce trebuie să observi?</p>
 </div>
-
 <div class="book-face book-back">
-
-<h3>
-Informația corectă
-</h3>
-
-<p>
-O informație trebuie analizată prin sursă,
-autor, dată, dovezi și context.
-</p>
-
+<h3>Informația corectă</h3>
+<p>O informație trebuie analizată prin sursă, autor, dată, dovezi și context.</p>
+</div>
+</div>
 </div>
 
-</div>
-
-</div>
-
-
-<div class="book"
-onclick="this.classList.toggle('open')">
-
+<div class="book" onclick="this.classList.toggle('open')">
 <div class="book-inner">
-
 <div class="book-face book-front">
-
-<div class="book-cover">
-©️
-</div>
-
+<div class="book-cover">©️</div>
 <h3>Drepturile de autor</h3>
-
-<p>
-Apasă pentru explicație.
-</p>
-
+<p>Apasă pentru explicație.</p>
 </div>
-
 <div class="book-face book-back">
-
-<h3>
-Copyright
-</h3>
-
-<p>
-O imagine sau o lucrare găsită online
-nu devine automat liberă pentru reutilizare.
-</p>
-
+<h3>Copyright</h3>
+<p>O imagine sau o lucrare găsită online nu devine automat liberă pentru reutilizare.</p>
+</div>
+</div>
 </div>
 
-</div>
-
-</div>
-
-
-<div class="book"
-onclick="this.classList.toggle('open')">
-
+<div class="book" onclick="this.classList.toggle('open')">
 <div class="book-inner">
-
 <div class="book-face book-front">
-
-<div class="book-cover">
-🎨
-</div>
-
+<div class="book-cover">🎨</div>
 <h3>Artistul digital</h3>
-
-<p>
-Descoperă rolul său.
-</p>
-
+<p>Descoperă rolul său.</p>
 </div>
-
 <div class="book-face book-back">
-
-<h3>
-Artistul informat
-</h3>
-
-<p>
-Artistul trebuie să știe să caute referințe,
-să verifice informații și să respecte creatorii.
-</p>
-
+<h3>Artistul informat</h3>
+<p>Artistul trebuie să știe să caute referințe, să verifice informații și să respecte creatorii.</p>
+</div>
+</div>
 </div>
 
-</div>
-
-</div>
-
-
-<div class="book"
-onclick="this.classList.toggle('open')">
-
+<div class="book" onclick="this.classList.toggle('open')">
 <div class="book-inner">
-
 <div class="book-face book-front">
-
-<div class="book-cover">
-🤖
-</div>
-
+<div class="book-cover">🤖</div>
 <h3>Inteligența Artificială</h3>
-
-<p>
-Apasă pentru detalii.
-</p>
-
+<p>Apasă pentru detalii.</p>
 </div>
-
 <div class="book-face book-back">
-
-<h3>
-AI și creativitatea
-</h3>
-
-<p>
-AI poate fi un instrument pentru idei și
-experimentare, dar rezultatele trebuie analizate.
-</p>
-
+<h3>AI și creativitatea</h3>
+<p>AI poate fi un instrument pentru idei și experimentare, dar rezultatele trebuie analizate.</p>
+</div>
+</div>
 </div>
 
 </div>
-
-</div>
-
-</div>
-
 </section>
 
-
 <!-- LABORATOR -->
-
 <section id="laborator" class="lab-section reveal">
 
-<h2>
-🎨 Studio-ul virtual al artistului
-</h2>
+<h2>🎨 Studio-ul virtual al artistului</h2>
 
 <p class="desc">
 Apasă pe instrumente și vezi imediat cum se schimbă
 informația din panoul interactiv.
 </p>
 
-
 <div class="lab-layout">
 
 <div class="tool-grid">
-
-
-<button class="tool active"
-onclick="selectTool('brush',this)">
-🖌️ Pensula
-</button>
-
-
-<button class="tool"
-onclick="selectTool('layers',this)">
-📚 Layers
-</button>
-
-
-<button class="tool"
-onclick="selectTool('color',this)">
-🎨 Culoarea
-</button>
-
-
-<button class="tool"
-onclick="selectTool('light',this)">
-💡 Lumina
-</button>
-
-
-<button class="tool"
-onclick="selectTool('reference',this)">
-🖼️ Referința
-</button>
-
-
-<button class="tool"
-onclick="selectTool('export',this)">
-💾 Exportul
-</button>
-
-
+<button class="tool active" onclick="selectTool('brush',this)">🖌️ Pensula</button>
+<button class="tool" onclick="selectTool('layers',this)">📚 Layers</button>
+<button class="tool" onclick="selectTool('color',this)">🎨 Culoarea</button>
+<button class="tool" onclick="selectTool('light',this)">💡 Lumina</button>
+<button class="tool" onclick="selectTool('reference',this)">🖼️ Referința</button>
+<button class="tool" onclick="selectTool('export',this)">💾 Exportul</button>
 </div>
-
 
 <div class="display">
-
-<div
-id="toolIcon"
-class="display-icon">
-🖌️
-</div>
-
-<h3 id="toolTitle">
-Pensula digitală
-</h3>
-
+<div id="toolIcon" class="display-icon">🖌️</div>
+<h3 id="toolTitle">Pensula digitală</h3>
 <p id="toolText">
 Pensula controlează linia, grosimea, opacitatea
 și textura. Ea transformă gestul artistului
 într-o imagine digitală.
 </p>
-
 </div>
 
 </div>
-
 
 <!-- EXPERIMENT CULORI -->
-
 <div class="color-lab">
 
-<h3 style="color:#493580">
-🌈 Experimentează cu atmosfera culorilor
-</h3>
+<h3 style="color:#493580">🌈 Experimentează cu atmosfera culorilor</h3>
 
-<p>
-Apasă pe o culoare și observă cum se schimbă
-panoul.
-</p>
+<p>Apasă pe o culoare și observă cum se schimbă panoul.</p>
 
-<div
-id="colorPreview"
-class="color-preview">
-Atmosferă vizuală
-</div>
+<div id="colorPreview" class="color-preview">Atmosferă vizuală</div>
 
 <div class="swatches">
-
-<button
-class="swatch"
-style="background:#a777e3"
-onclick="setColor('#a777e3','Mov — creativitate')">
-</button>
-
-<button
-class="swatch"
-style="background:#f29bc2"
-onclick="setColor('#f29bc2','Roz — energie')">
-</button>
-
-<button
-[28.09.2026 21:12] Yoma: class="swatch"
-style="background:#6e8efb"
-onclick="setColor('#6e8efb','Albastru — calm')">
-</button>
-
-<button
-class="swatch"
-style="background:#f5c451"
-onclick="setColor('#f5c451','Galben — atenție')">
-</button>
-
-<button
-class="swatch"
-style="background:#72c99b"
-onclick="setColor('#72c99b','Verde — echilibru')">
-</button>
-
+<button class="swatch" style="background:#a777e3" onclick="setColor('#a777e3','Mov — creativitate')"></button>
+<button class="swatch" style="background:#f29bc2" onclick="setColor('#f29bc2','Roz — energie')"></button>
+<button class="swatch" style="background:#6e8efb" onclick="setColor('#6e8efb','Albastru — calm')"></button>
+<button class="swatch" style="background:#f5c451" onclick="setColor('#f5c451','Galben — atenție')"></button>
+<button class="swatch" style="background:#72c99b" onclick="setColor('#72c99b','Verde — echilibru')"></button>
 </div>
 
-<p
-id="colorText"
-style="margin-top:15px;font-weight:bold;color:#493580">
-Alege o culoare.
-</p>
+<p id="colorText" style="margin-top:15px;font-weight:bold;color:#493580">Alege o culoare.</p>
 
 </div>
-
 </section>
 
-
 <!-- FAKE NEWS -->
-
 <section id="fake" class="fake reveal">
 
-<h2>
-🕵️ Detectivul informației
-</h2>
+<h2>🕵️ Detectivul informației</h2>
 
 <p class="desc">
 Ai primit o afirmație online. Investighează elementele
@@ -1406,65 +1183,32 @@ ei înainte să decizi dacă poate fi considerată credibilă.
 <div class="news">
 
 <div class="news-head">
-
 <h3>📰 Știre virală</h3>
-
-<span class="source">
-Sursa: necunoscută
-</span>
-
+<span class="source">Sursa: necunoscută</span>
 </div>
 
 <div class="claim">
-
-„Această imagine demonstrează că un eveniment
-s-a întâmplat ieri.”
-
+„Această imagine demonstrează că un eveniment s-a întâmplat ieri.”
 </div>
 
-<p style="margin-top:15px">
-<strong>
-Ce trebuie să verifici?
-</strong>
-</p>
+<p style="margin-top:15px"><strong>Ce trebuie să verifici?</strong></p>
 
 <div class="evidence">
-
-<button onclick="inspectEvidence(0)">
-👤 Cine este autorul?
-</button>
-
-<button onclick="inspectEvidence(1)">
-📅 Care este data?
-</button>
-
-<button onclick="inspectEvidence(2)">
-🔗 Unde este sursa originală?
-</button>
-
-<button onclick="inspectEvidence(3)">
-🌍 Care este contextul?
-</button>
-
+<button onclick="inspectEvidence(0,this)">👤 Cine este autorul?</button>
+<button onclick="inspectEvidence(1,this)">📅 Care este data?</button>
+<button onclick="inspectEvidence(2,this)">🔗 Unde este sursa originală?</button>
+<button onclick="inspectEvidence(3,this)">🌍 Care este contextul?</button>
 </div>
 
-<div
-id="evidenceResult"
-class="result">
-</div>
+<div id="evidenceResult" class="result"></div>
 
 </div>
-
 </section>
 
-
 <!-- COPYRIGHT -->
-
 <section id="copyright" class="reveal">
 
-<h2>
-©️ Artistul și drepturile de autor
-</h2>
+<h2>©️ Artistul și drepturile de autor</h2>
 
 <p class="desc">
 Înainte să folosești o imagine, un model sau o altă
@@ -1474,94 +1218,42 @@ creație găsită online, trebuie să fii atent la sursă
 
 <div class="info-grid">
 
-
-<div
-class="info-card"
-onclick="showInfo(
-'copyrightInfo',
-'O imagine găsită pe Internet poate avea o licență. Verifică dacă este permisă reutilizarea și în ce condiții.'
-)"
+<div class="info-card"
+onclick="showInfo('copyrightInfo','O imagine găsită pe Internet poate avea o licență. Verifică dacă este permisă reutilizarea și în ce condiții.')"
 style="cursor:pointer">
-
 <div class="icon">🖼️</div>
-
-<h3>
-Imagine găsită online
-</h3>
-
-<p>
-Apasă pentru explicație.
-</p>
-
+<h3>Imagine găsită online</h3>
+<p>Apasă pentru explicație.</p>
 </div>
 
-
-<div
-class="info-card"
-onclick="showInfo(
-'copyrightInfo',
-'Atribuirea înseamnă să recunoști creatorul și sursa atunci când condițiile licenței o cer sau când este relevant pentru context.'
-)"
+<div class="info-card"
+onclick="showInfo('copyrightInfo','Atribuirea înseamnă să recunoști creatorul și sursa atunci când condițiile licenței o cer sau când este relevant pentru context.')"
 style="cursor:pointer">
-
 <div class="icon">✍️</div>
-
-<h3>
-Atribuirea
-</h3>
-
-<p>
-Apasă pentru explicație.
-</p>
-
+<h3>Atribuirea</h3>
+<p>Apasă pentru explicație.</p>
 </div>
 
-
-<div
-class="info-card"
-onclick="showInfo(
-'copyrightInfo',
-'Inspirația și copierea nu sunt același lucru. Este important să construiești o lucrare proprie și să respecți drepturile creatorului original.'
-)"
+<div class="info-card"
+onclick="showInfo('copyrightInfo','Inspirația și copierea nu sunt același lucru. Este important să construiești o lucrare proprie și să respecți drepturile creatorului original.')"
 style="cursor:pointer">
-
 <div class="icon">💡</div>
-
-<h3>
-Inspirație
-</h3>
-
-<p>
-Apasă pentru explicație.
-</p>
-
+<h3>Inspirație</h3>
+<p>Apasă pentru explicație.</p>
 </div>
 
 </div>
 
-<div
-id="copyrightInfo"
-style="
-max-width:850px;
-margin:25px auto 0;
-padding:20px;
-background:#eee8ff;
-border-radius:15px;
-text-align:center;
-display:none;
-">
+<div id="copyrightInfo"
+style="max-width:850px;margin:25px auto 0;padding:20px;background:#eee8ff;border-radius:15px;text-align:center;display:none;">
 </div>
 
 </section>
 
-
 <!-- AI -->
-
 <section id="ai" class="ai reveal">
 
-<h2>
-🤖 AI și artistul digital
-</h2>
+<h2>🤖 AI și artistul digital</h2>
 
 <p class="desc">
 Înțelege câteva dintre întrebările pe care un artist
@@ -1571,80 +1263,35 @@ instrumente AI.
 
 <div class="ai-grid">
 
+<div class="ai-card">
+<h3>💭 Ideea</h3>
+<p>AI poate fi folosit pentru brainstorming și explorarea unor direcții vizuale.</p>
+</div>
 
 <div class="ai-card">
-
-<h3>
-💭 Ideea
-</h3>
-
-<p>
-AI poate fi folosit pentru brainstorming și
-explorarea unor direcții vizuale.
-</p>
-
+<h3>🔎 Verificarea</h3>
+<p>Rezultatul trebuie analizat. Un instrument automat poate produce informații sau imagini care necesită verificare.</p>
 </div>
-
 
 <div class="ai-card">
-
-<h3>
-🔎 Verificarea
-</h3>
-
-<p>
-Rezultatul trebuie analizat. Un instrument automat
-poate produce informații sau imagini care necesită
-verificare.
-</p>
-
+<h3>🧑‍🎨 Contribuția umană</h3>
+<p>Artistul poate folosi propriile decizii, editări, desen, compoziție și cunoștințe pentru a construi rezultatul final.</p>
 </div>
-
 
 <div class="ai-card">
-
-<h3>
-🧑‍🎨 Contribuția umană
-</h3>
-
-<p>
-Artistul poate folosi propriile decizii, editări,
-desen, compoziție și cunoștințe pentru a construi
-rezultatul final.
-</p>
-
-</div>
-
-
-<div class="ai-card">
-
-<h3>
-⚖️ Transparența
-</h3>
-
-<p>
-Este util să explici ce instrumente ai folosit
-atunci când contextul proiectului o cere.
-</p>
-
+<h3>⚖️ Transparența</h3>
+<p>Este util să explici ce instrumente ai folosit atunci când contextul proiectului o cere.</p>
 </div>
 
 </div>
-
 </section>
 
-
 <!-- SCENARIU -->
-
 <section class="reveal">
 
-<h2>
-🎮 Tu ești artistul
-</h2>
+<h2>🎮 Tu ești artistul</h2>
 
-<p class="desc">
-Alege ce ai face într-o situație reală.
-</p>
+<p class="desc">Alege ce ai face într-o situație reală.</p>
 
 <div class="scenario">
 
@@ -1653,46 +1300,27 @@ Ai găsit o fotografie perfectă pentru un concept
 de joc. Nu știi cine a făcut-o.
 </h3>
 
-
-<button
-class="choice"
-onclick="scenario(0)">
-A.
-[28.09.2026 21:12] Yoma: O pun direct în proiect.
+<button class="choice" onclick="scenario(0,this)">
+A. O pun direct în proiect.
 </button>
 
-
-<button
-class="choice"
-onclick="scenario(1)">
+<button class="choice" onclick="scenario(1,this)">
 B. Caut sursa originală și verific licența.
 </button>
 
-
-<button
-class="choice"
-onclick="scenario(2)">
+<button class="choice" onclick="scenario(2,this)">
 C. O modific puțin și presupun că este liberă.
 </button>
 
-
-<div
-class="feedback"
-id="scenarioFeedback">
-</div>
+<div class="feedback" id="scenarioFeedback"></div>
 
 </div>
-
 </section>
 
-
 <!-- RESPONSABILITATE -->
-
 <section class="learning reveal">
 
-<h2>
-✨ Responsabilitatea artistului digital
-</h2>
+<h2>✨ Responsabilitatea artistului digital</h2>
 
 <p class="desc">
 Un artist digital lucrează cu imagini, informații,
@@ -1701,45 +1329,19 @@ face parte din procesul creativ.
 </p>
 
 <ul class="resp-list">
-
-<li>
-🎨 <strong>Originalitate:</strong>
-creează lucrări proprii și respectă munca altor artiști.
-</li>
-
-<li>
-🔎 <strong>Verificarea:</strong>
-analizează sursele înainte de a distribui informații.
-</li>
-
-<li>
-©️ <strong>Copyright:</strong>
-respectă licențele și condițiile de utilizare.
-</li>
-
-<li>
-💬 <strong>Comunicare:</strong>
-înțelege că imaginile pot influența modul în care
-publicul percepe un mesaj.
-</li>
-
-<li>
-🤖 <strong>Tehnologie:</strong>
-folosește instrumentele digitale în mod conștient.
-</li>
-
+<li>🎨 <strong>Originalitate:</strong> creează lucrări proprii și respectă munca altor artiști.</li>
+<li>🔎 <strong>Verificarea:</strong> analizează sursele înainte de a distribui informații.</li>
+<li>©️ <strong>Copyright:</strong> respectă licențele și condițiile de utilizare.</li>
+<li>💬 <strong>Comunicare:</strong> înțelege că imaginile pot influența modul în care publicul percepe un mesaj.</li>
+<li>🤖 <strong>Tehnologie:</strong> folosește instrumentele digitale în mod conștient.</li>
 </ul>
 
 </section>
 
-
-<!-- CE INSEAMNA ARTIST INFORMAT -->
-
+<!-- ARTIST INFORMAT -->
 <section class="reveal">
 
-<h2>
-🧠 Ce înseamnă să fii un artist informat?
-</h2>
+<h2>🧠 Ce înseamnă să fii un artist informat?</h2>
 
 <p class="desc">
 Nu înseamnă doar să desenezi bine. Înseamnă și să
@@ -1748,237 +1350,132 @@ Nu înseamnă doar să desenezi bine. Înseamnă și să
 
 <div class="info-grid">
 
+<div class="info-card">
+<div class="icon">🧠</div>
+<h3>Gândește critic</h3>
+<p>Nu accepta automat prima informație pe care o întâlnești.</p>
+</div>
 
 <div class="info-card">
-
-<div class="icon">
-🧠
+<div class="icon">🔗</div>
+<h3>Urmărește sursa</h3>
+<p>Încearcă să ajungi la sursa originală, nu doar la o repostare.</p>
 </div>
-
-<h3>
-Gândește critic
-</h3>
-
-<p>
-Nu accepta automat prima informație pe care
-o întâlnești.
-</p>
-
-</div>
-
 
 <div class="info-card">
-
-<div class="icon">
-🔗
+<div class="icon">🎯</div>
+<h3>Înțelege contextul</h3>
+<p>O imagine poate avea un sens diferit atunci când este scoasă din context.</p>
 </div>
-
-<h3>
-Urmărește sursa
-</h3>
-
-<p>
-Încearcă să ajungi la sursa originală,
-nu doar la o repostare.
-</p>
-
-</div>
-
 
 <div class="info-card">
-
-<div class="icon">
-🎯
-</div>
-
-<h3>
-Înțelege contextul
-</h3>
-
-<p>
-O imagine poate avea un sens diferit atunci
-când este scoasă din context.
-</p>
-
-</div>
-
-
-<div class="info-card">
-
-<div class="icon">
-🌱
-</div>
-
-<h3>
-Învață continuu
-</h3>
-
-<p>
-Instrumentele și mediul digital se schimbă,
-iar artistul trebuie să se adapteze.
-</p>
-
+<div class="icon">🌱</div>
+<h3>Învață continuu</h3>
+<p>Instrumentele și mediul digital se schimbă, iar artistul trebuie să se adapteze.</p>
 </div>
 
 </div>
-
 </section>
 
-
 <!-- QUIZ -->
-
 <section id="quiz" class="reveal">
 
 <div class="quiz">
 
-<h2>
-🧠 Quiz final
-</h2>
+<h2>🧠 Quiz final</h2>
 
-<p class="desc">
-Răspunde la întrebări. Scorul se actualizează imediat.
-</p>
-
+<p class="desc">Răspunde la întrebări. Scorul se actualizează imediat.</p>
 
 <div class="q">
-
-<h3>
-1. Ce trebuie verificat la o informație?
-</h3>
-
-<button onclick="quiz(this,true)">
-A. Sursa, autorul și contextul
-</button>
-
-<button onclick="quiz(this,false)">
-B. Doar numărul de aprecieri
-</button>
-
-<button onclick="quiz(this,false)">
-C. Doar imaginea
-</button>
-
+<h3>1. Ce trebuie verificat la o informație?</h3>
+<button onclick="quiz(this,true)">A. Sursa, autorul și contextul</button>
+<button onclick="quiz(this,false)">B. Doar numărul de aprecieri</button>
+<button onclick="quiz(this,false)">C. Doar imaginea</button>
 </div>
-
 
 <div class="q">
-
-<h3>
-2. Ce faci înainte să folosești imaginea altui creator?
-</h3>
-
-<button onclick="quiz(this,true)">
-A. Verifici drepturile și licența
-</button>
-
-<button onclick="quiz(this,false)">
-B. O copiezi fără să verifici
-</button>
-
-<button onclick="quiz(this,false)">
-C. Ștergi numele autorului
-</button>
-
+<h3>2. Ce faci înainte să folosești imaginea altui creator?</h3>
+<button onclick="quiz(this,true)">A. Verifici drepturile și licența</button>
+<button onclick="quiz(this,false)">B. O copiezi fără să verifici</button>
+<button onclick="quiz(this,false)">C. Ștergi numele autorului</button>
 </div>
-
 
 <div class="q">
-
-<h3>
-3. De ce poate fi o imagine înșelătoare?
-</h3>
-
-<button onclick="quiz(this,true)">
-A. Poate fi editată sau scoasă din context
-</button>
-
-<button onclick="quiz(this,false)">
-B. Pentru că toate imaginile sunt false
-</button>
-
-<button onclick="quiz(this,false)">
-C. Pentru că imaginile nu transmit informații
-</button>
-
+<h3>3. De ce poate fi o imagine înșelătoare?</h3>
+<button onclick="quiz(this,true)">A. Poate fi editată sau scoasă din context</button>
+<button onclick="quiz(this,false)">B. Pentru că toate imaginile sunt false</button>
+<button onclick="quiz(this,false)">C. Pentru că imaginile nu transmit informații</button>
 </div>
-
 
 <div class="q">
-
-<h3>
-4. Cum poate fi folosit AI în procesul creativ?
-</h3>
-
-<button onclick="quiz(this,true)">
-A. Ca instrument pentru idei și experimentare
-</button>
-
-<button onclick="quiz(this,false)">
-B. Ca înlocuitor obligatoriu al artistului
-</button>
-
-<button onclick="quiz(this,false)">
-C. Fără să fie verificat rezultatul
-</button>
-
+<h3>4. Cum poate fi folosit AI în procesul creativ?</h3>
+<button onclick="quiz(this,true)">A. Ca instrument pentru idei și experimentare</button>
+<button onclick="quiz(this,false)">B. Ca înlocuitor obligatoriu al artistului</button>
+<button onclick="quiz(this,false)">C. Fără să fie verificat rezultatul</button>
 </div>
 
+<div class="score" id="score">Scor: 0 / 4</div>
 
-<div
-class="score"
-id="score">
-Scor: 0 / 4
+<div id="quizFinal"></div>
+
+<div style="text-align:center;margin-top:20px">
+<button class="btn small" onclick="resetQuiz()">🔄 Reia quizul</button>
 </div>
 
 </div>
-
 </section>
 
+<!-- PISICA (desen SVG inclus — nu mai depinde de pisica.jpeg) -->
+<div class="cat-guide" id="cat" title="Apasă pe Mia!">
 
-<!-- PISICA -->
+<div class="cat-bubble" id="catBubble"></div>
 
-<div
-class="cat-guide"
-id="cat">
+<svg viewBox="0 0 200 200" role="img" aria-label="Pisica ghid Mia">
+    <!-- urechi -->
+    <path d="M46 78 L26 16 L90 46 Z" fill="#ef9fc7"/>
+    <path d="M50 70 L36 30 L78 50 Z" fill="#fbd7e8"/>
+    <path d="M154 78 L174 16 L110 46 Z" fill="#ef9fc7"/>
+    <path d="M150 70 L164 30 L122 50 Z" fill="#fbd7e8"/>
+    <!-- cap -->
+    <circle cx="100" cy="112" r="66" fill="#f6bfda"/>
+    <!-- dunguti -->
+    <path d="M100 50 v14" stroke="#e795bf" stroke-width="6" stroke-linecap="round"/>
+    <path d="M86 54 v11" stroke="#e795bf" stroke-width="5" stroke-linecap="round"/>
+    <path d="M114 54 v11" stroke="#e795bf" stroke-width="5" stroke-linecap="round"/>
+    <!-- ochi -->
+    <ellipse cx="76" cy="104" rx="9" ry="12" fill="#3b2d55"/>
+    <ellipse cx="124" cy="104" rx="9" ry="12" fill="#3b2d55"/>
+    <circle cx="79" cy="100" r="3.2" fill="#fff"/>
+    <circle cx="127" cy="100" r="3.2" fill="#fff"/>
+    <!-- nas -->
+    <path d="M100 124 l-7 -5 q7 -5 14 0 Z" fill="#d96a9e"/>
+    <!-- gura -->
+    <path d="M100 124 q-2 10 -14 11 M100 124 q2 10 14 11"
+          stroke="#3b2d55" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- mustati -->
+    <path d="M34 106 q16 -4 30 -2 M34 120 q16 2 30 6"
+          stroke="#3b2d55" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M166 106 q-16 -4 -30 -2 M166 120 q-16 2 -30 6"
+          stroke="#3b2d55" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- obrazori -->
+    <circle cx="60" cy="128" r="8" fill="#f28fb6" opacity=".6"/>
+    <circle cx="140" cy="128" r="8" fill="#f28fb6" opacity=".6"/>
+</svg>
 
-<div
-class="cat-bubble"
-id="catBubble">
 </div>
-
-<img
-src="pisica.jpeg"
-alt="Pisica ghid">
-</div>
-
 
 <!-- SUS -->
-
-<button
-id="top"
-onclick="window.scrollTo({top:0,behavior:'smooth'})">
-↑
-</button>
-
+<button id="top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <!-- FOOTER -->
-
 <footer>
-
-<p>
-🐾 Mia te felicită că ai ajuns până aici!
-</p>
-
-<p style="margin-top:8px">
-© 2026 — Cultura informațională și rolul artistului
-</p>
-[28.09.2026 21:12] Yoma: </footer>
-
+<p>🐾 Mia te felicită că ai ajuns până aici!</p>
+<p style="margin-top:8px">© 2026 — Cultura informațională și rolul artistului</p>
+</footer>
 
 <script>
 
 /* PROGRES */
-
 window.addEventListener("scroll",()=>{
 
     const y=document.documentElement.scrollTop;
@@ -1997,67 +1494,40 @@ window.addEventListener("scroll",()=>{
 
 });
 
-
 /* APARITIA SECTIUNILOR */
-
-const observer=
-new IntersectionObserver(entries=>{
-
+const observer=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
-
         if(e.isIntersecting)
             e.target.classList.add("visible");
-
     });
-
 },{threshold:.12});
-
 
 document
     .querySelectorAll(".reveal")
     .forEach(x=>observer.observe(x));
 
-
 /* PISICA */
-
-const cat=
-document.getElementById("cat");
-
-const catBubble=
-document.getElementById("catBubble");
+const cat=document.getElementById("cat");
+const catBubble=document.getElementById("catBubble");
 
 const catMessages=[
-
 "🐾 Încearcă să apropii mouse-ul de cărticelele de mai sus!",
-
 "🔎 În secțiunea Fake News trebuie să cauți dovezile.",
-
 "🎨 În laborator poți schimba instrumentele și culorile.",
-
 "©️ Nu uita: o imagine găsită online nu este automat liberă.",
-
 "🤖 AI poate fi un instrument, dar rezultatul trebuie înțeles și verificat.",
-
 "🧠 La final te așteaptă un quiz!"
-
 ];
-
 
 cat.addEventListener("click",()=>{
 
     cat.classList.remove("talk");
-
     void cat.offsetWidth;
-
     cat.classList.add("talk");
 
     catBubble.innerHTML=
         "<strong>🐾 Mia spune:</strong><br><br>"+
-        catMessages[
-            Math.floor(
-                Math.random()*catMessages.length
-            )
-        ];
+        catMessages[Math.floor(Math.random()*catMessages.length)];
 
     catBubble.style.display="block";
 
@@ -2067,9 +1537,18 @@ cat.addEventListener("click",()=>{
 
 });
 
+/* mesaj de bun venit */
+setTimeout(()=>{
+    catBubble.innerHTML=
+        "<strong>🐾 Mia spune:</strong><br><br>"+
+        "Salut! Apasă pe mine oricând vrei un sfat! 🐱";
+    catBubble.style.display="block";
+    setTimeout(()=>{
+        catBubble.style.display="";
+    },6000);
+},2500);
 
 /* LABORATOR */
-
 const tools={
 
 brush:[
@@ -2110,7 +1589,6 @@ export:[
 
 };
 
-
 function selectTool(key,btn){
 
     document
@@ -2121,28 +1599,20 @@ function selectTool(key,btn){
 
     const d=tools[key];
 
-    const icon=
-        document.getElementById("toolIcon");
+    const icon=document.getElementById("toolIcon");
 
     icon.classList.remove("pop");
-
     void icon.offsetWidth;
-
     icon.classList.add("pop");
 
     icon.textContent=d[0];
 
-    document.getElementById("toolTitle")
-        .textContent=d[1];
-
-    document.getElementById("toolText")
-        .textContent=d[2];
+    document.getElementById("toolTitle").textContent=d[1];
+    document.getElementById("toolText").textContent=d[2];
 
 }
 
-
 /* CULORI */
-
 function setColor(color,text){
 
     document
@@ -2155,15 +1625,11 @@ function setColor(color,text){
 
     document
         .getElementById("colorText")
-        .textContent=
-        "Ai ales: "+text+
-        ". Observă cum se schimbă atmosfera vizuală.";
+        .textContent="Ai ales: "+text+". Observă cum se schimbă atmosfera vizuală.";
 
 }
 
-
 /* FAKE NEWS */
-
 const evidence=[
 
 "Autorul nu este identificat. Lipsa autorului nu demonstrează că informația este falsă, dar este un motiv să cauți o sursă mai clară.",
@@ -2176,92 +1642,136 @@ const evidence=[
 
 ];
 
+function inspectEvidence(i,btn){
 
-function inspectEvidence(i){
-
-    const r=
-        document.
-[28.09.2026 21:12] Yoma: getElementById("evidenceResult");
+    const r=document.getElementById("evidenceResult");
 
     r.style.display="block";
-
     r.style.background="#eee8ff";
+    r.innerHTML="🔎 <strong>Observație:</strong> "+evidence[i];
 
-    r.innerHTML=
-        "🔎 <strong>Observație:</strong> "+
-        evidence[i];
+    document
+        .querySelectorAll(".evidence button")
+        .forEach(b=>b.classList.remove("active-e"));
+
+    if(btn)btn.classList.add("active-e");
 
 }
 
-
 /* COPYRIGHT */
-
 function showInfo(id,text){
 
-    const box=
-        document.getElementById(id);
+    const box=document.getElementById(id);
 
     box.style.display="block";
-
     box.textContent=text;
 
 }
 
-
 /* SCENARIU */
+function scenario(choice,btn){
 
-function scenario(choice){
+    document
+        .querySelectorAll(".choice")
+        .forEach(b=>b.classList.remove("selected"));
 
-    const box=
-        document.getElementById("scenarioFeedback");
+    if(btn)btn.classList.add("selected");
+
+    const box=document.getElementById("scenarioFeedback");
 
     box.style.display="block";
 
     if(choice===1){
-
         box.innerHTML=
         "🎉 Alegerea ta este cea mai sigură abordare: cauți creatorul și verifici condițiile de utilizare înainte să incluzi imaginea în proiect.";
-
     }else{
-
         box.innerHTML=
         "💡 Înainte de utilizare, este recomandat să identifici sursa originală și să verifici licența. Faptul că o imagine este online nu înseamnă automat că poate fi reutilizată.";
-
     }
 
 }
 
-
 /* QUIZ */
-
 let score=0;
+let answered=0;
+const TOTAL=4;
 
 function quiz(btn,correct){
 
-    if(btn.parentElement.dataset.done==="1")
+    const q=btn.closest(".q");
+
+    if(!q||q.dataset.done==="1")
         return;
 
-    btn.parentElement.dataset.done="1";
+    q.dataset.done="1";
 
-    btn.parentElement
-        .querySelectorAll("button")
+    q.querySelectorAll("button")
         .forEach(b=>b.disabled=true);
 
     if(correct){
-
         btn.classList.add("correct");
-
         score++;
-
     }else{
-
         btn.classList.add("wrong");
-
+        /* aratam si raspunsul corect */
+        q.querySelectorAll("button").forEach(b=>{
+            const oc=b.getAttribute("onclick")||"";
+            if(oc.indexOf("quiz(this,true)")!==-1)
+                b.classList.add("correct");
+        });
     }
 
-    document.getElementById("score")
-        .textContent=
-        "Scor: "+score+" / 4";
+    answered++;
+
+    document.getElementById("score").textContent=
+        "Scor: "+score+" / "+TOTAL;
+
+    if(answered===TOTAL)
+        showQuizFinal();
+
+}
+
+function showQuizFinal(){
+
+    const f=document.getElementById("quizFinal");
+
+    let msg;
+
+    if(score===TOTAL)
+        msg="🏆 Perfect! Ești un maestru al culturii informaționale!";
+    else if(score>=TOTAL/2)
+        msg="🎉 Foarte bine! Mai verifică întrebările la care ai greșit.";
+    else
+        msg="💡 Mai încearcă o dată — deschide cărțile de mai sus pentru indicii!";
+
+    f.innerHTML=
+        "<strong>"+msg+"</strong><br>"+
+        "Răspunsuri corecte: "+score+" din "+TOTAL;
+
+    f.style.display="block";
+
+}
+
+function resetQuiz(){
+
+    score=0;
+    answered=0;
+
+    document.querySelectorAll(".q").forEach(q=>{
+
+        q.removeAttribute("data-done");
+
+        q.querySelectorAll("button").forEach(b=>{
+            b.disabled=false;
+            b.classList.remove("correct","wrong");
+        });
+
+    });
+
+    document.getElementById("score").textContent=
+        "Scor: 0 / "+TOTAL;
+
+    document.getElementById("quizFinal").style.display="none";
 
 }
 
