@@ -3,908 +3,939 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Cultura informațională și rolul artistului</title>
+<title>Cultura informațională — Laboratorul artistului</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f3ff;
-    color: #25233a;
-    line-height: 1.6;
-    overflow-x: hidden;
+body{
+    font-family:Arial,sans-serif;
+    color:#25233a;
+    line-height:1.65;
+    background:
+      radial-gradient(circle at 10% 10%,rgba(199,167,255,.45),transparent 25%),
+      radial-gradient(circle at 90% 25%,rgba(249,217,236,.65),transparent 28%),
+      radial-gradient(circle at 20% 90%,rgba(167,183,255,.35),transparent 25%),
+      #f5f3ff;
+    overflow-x:hidden;
 }
 
-/* =========================================================
-   BACKGROUND DECORATIV
-========================================================= */
-
-.background-shapes {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+    background-image:
+      radial-gradient(circle,rgba(108,75,196,.10) 1px,transparent 1px);
+    background-size:28px 28px;
 }
 
-.shape {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(3px);
-    opacity: 0.25;
-    animation: floating 8s ease-in-out infinite;
+/* PROGRES */
+
+.progress{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:#ddd7ee;
+    z-index:3000;
 }
 
-.shape.one {
-    width: 300px;
-    height: 300px;
-    background: #c9a7ff;
-    top: 10%;
-    left: -100px;
+.progress i{
+    display:block;
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#a777e3,#6e8efb);
+    transition:width .12s;
 }
 
-.shape.two {
-    width: 250px;
-    height: 250px;
-    background: #f9b8df;
-    top: 45%;
-    right: -80px;
-    animation-delay: 2s;
+/* ANIMATII */
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-18px)}
 }
 
-.shape.three {
-    width: 180px;
-    height: 180px;
-    background: #a7b7ff;
-    bottom: 10%;
-    left: 15%;
-    animation-delay: 4s;
+@keyframes gradient{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
 
-/* =========================================================
-   PROGRESS BAR
-========================================================= */
-
-.progress-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: rgba(255,255,255,0.2);
-    z-index: 2000;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg,#a777e3,#6e8efb);
-}
-
-/* =========================================================
-   ANIMATII
-========================================================= */
-
-@keyframes fadeDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
+@keyframes up{
+    from{
+        opacity:0;
+        transform:translateY(40px);
     }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    to{
+        opacity:1;
+        transform:none;
     }
 }
 
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
+@keyframes pulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.06)}
+}
+
+@keyframes pop{
+    0%{transform:scale(.7) rotate(-10deg)}
+    60%{transform:scale(1.25) rotate(8deg)}
+    100%{transform:scale(1) rotate(0)}
+}
+
+@keyframes catFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
+}
+
+@keyframes catTalk{
+    0%{transform:scale(1)}
+    40%{transform:scale(1.08) rotate(-2deg)}
+    70%{transform:scale(1.03) rotate(2deg)}
+    100%{transform:scale(1)}
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:2000;
+    background:#211b3d;
+    color:white;
+    padding:14px 6%;
+    box-shadow:0 5px 25px rgba(33,27,61,.25);
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+}
+
+.nav{
+    display:flex;
+    gap:16px;
+    list-style:none;
+    flex-wrap:wrap;
+}
+
+.nav a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    position:relative;
+}
+
+.nav a:after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-4px;
+    width:0;
+    height:2px;
+    background:#c9a7ff;
+    transition:.3s;
+}
+
+.nav a:hover:after{
+    width:100%;
+}
+
+/* HERO */
+
+.hero{
+    min-height:82vh;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    padding:80px 20px;
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(
+            135deg,
+            #d9c7ff,
+            #f9d9ec,
+            #d9c7ff
+        );
+    background-size:300% 300%;
+    animation:gradient 12s ease infinite;
+}
+
+.hero:before,
+.hero:after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.35);
+    animation:float 7s ease-in-out infinite;
+}
+
+.hero:before{
+    width:220px;
+    height:220px;
+    left:5%;
+    top:12%;
+}
+
+.hero:after{
+    width:320px;
+    height:320px;
+    right:-80px;
+    bottom:-120px;
+    animation-delay:2s;
+}
+
+.hero-content{
+    max-width:900px;
+    position:relative;
+    z-index:2;
+    animation:up 1s;
+}
+
+.badge{
+    display:inline-block;
+    background:#ffe699;
+    color:#5c4300;
+    padding:7px 15px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:16px;
+    animation:pulse 2s infinite;
+}
+
+h1{
+    font-size:clamp(38px,6vw,62px);
+    line-height:1.1;
+    color:#211b3d;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:20px;
+    max-width:760px;
+    margin:0 auto 30px;
+}
+
+.btn{
+    border:0;
+[28.09.2026 21:12] Yoma: display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 25px;
+    border-radius:30px;
+    background:#6c4bc4;
+    color:white;
+    text-decoration:none;
+    font-weight:800;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 8px 20px rgba(108,75,196,.25);
+}
+
+.btn:hover{
+    background:#51349c;
+    transform:translateY(-4px) scale(1.03);
+}
+
+/* SECTIUNI */
+
+section{
+    padding:85px 7%;
+    position:relative;
+}
+
+section h2{
+    text-align:center;
+    font-size:36px;
+    color:#3d2d72;
+    margin-bottom:15px;
+}
+
+.desc{
+    max-width:820px;
+    text-align:center;
+    margin:0 auto 38px;
+    color:#524b70;
+    font-size:17px;
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:.8s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:none;
+}
+
+/* CARDURI */
+
+.info-grid,
+.concept-grid,
+.tool-grid,
+.ai-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.info-card{
+    background:rgba(255,255,255,.9);
+    padding:30px;
+    border-radius:24px;
+    box-shadow:0 8px 25px rgba(40,30,70,.10);
+    transition:.45s;
+    transform-style:preserve-3d;
+}
+
+.info-card:hover{
+    transform:translateY(-10px) rotateX(4deg) rotateY(-4deg);
+    box-shadow:0 18px 35px rgba(40,30,70,.18);
+}
+
+.icon{
+    font-size:45px;
+    margin-bottom:12px;
+}
+
+.info-card h3{
+    color:#493580;
+    margin-bottom:8px;
+}
+
+/* PASI */
+
+.learning{
+    background:#eee8ff;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:22px;
+}
+
+.step{
+    background:white;
+    padding:28px;
+    border-radius:22px;
+    text-align:center;
+    box-shadow:0 5px 18px rgba(40,30,70,.08);
+    transition:.35s;
+}
+
+.step:hover{
+    transform:translateY(-8px);
+}
+
+.num{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:#6c4bc4;
+    color:white;
+    display:grid;
+    place-items:center;
+    margin:0 auto 14px;
+    font-size:21px;
+    font-weight:bold;
+}
+
+/* CARTI 3D */
+
+.book-zone{
+    perspective:1200px;
+}
+
+.books{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:28px;
+}
+
+.book{
+    height:285px;
+    perspective:1100px;
+    cursor:pointer;
+}
+
+.book-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:
+        transform .75s cubic-bezier(.2,.8,.2,1);
+    transform-style:preserve-3d;
+}
+
+.book:hover .book-inner,
+.book.open .book-inner{
+    transform:rotateY(180deg);
+}
+
+.book-face{
+    position:absolute;
+    inset:0;
+    backface-visibility:hidden;
+    border-radius:22px;
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    box-shadow:0 9px 28px rgba(40,30,70,.13);
+}
+
+.book-front{
+    background:white;
+}
+
+.book-back{
+    background:linear-gradient(135deg,#6c4bc4,#483285);
+    color:white;
+    transform:rotateY(180deg);
+}
+
+.book-cover{
+    width:92px;
+    height:115px;
+    border-radius:8px;
+    background:#d9c7ff;
+    display:grid;
+    place-items:center;
+    font-size:48px;
+    margin-bottom:15px;
+    box-shadow:8px 8px 0 rgba(61,45,114,.18);
+    transition:.4s;
+}
+
+.book:hover .book-cover{
+    transform:rotate(-6deg) translateY(-5px);
+}
+
+.book-back h3{
+    margin-bottom:10px;
+    color:#fff;
+}
+
+/* LABORATOR */
+
+.lab-section{
+    background:#1a1530;
+    color:white;
+    border-radius:32px;
+    margin:45px 5%;
+    padding:65px 5%;
+    box-shadow:0 15px 40px rgba(0,0,0,.22);
+}
+
+.lab-section h2{
+    color:white;
+}
+
+.lab-section .desc{
+    color:#b3a7d6;
+}
+
+.lab-layout{
+    display:grid;
+    grid-template-columns:1fr 1.1fr;
+    gap:30px;
+    align-items:stretch;
+}
+
+.tool-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.tool{
+    background:#2d2552;
+    color:white;
+    border:2px solid #6c4bc4;
+    padding:20px;
+    border-radius:18px;
+    cursor:pointer;
+    text-align:left;
+    transition:.3s;
+}
+
+.tool:hover,
+.tool.active{
+    background:#6c4bc4;
+    transform:translateY(-5px);
+    box-shadow:0 10px 22px rgba(108,75,196,.3);
+}
+
+.display{
+[28.09.2026 21:12] Yoma: min-height:330px;
+    background:#251f42;
+    border:1px solid #493f76;
+    border-radius:25px;
+    padding:35px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    box-shadow:0 0 25px rgba(139,92,246,.12);
+}
+
+.display-icon{
+    font-size:75px;
+    transition:.5s;
+}
+
+.pop{
+    animation:pop .55s;
+}
+
+.display h3{
+    color:#c9a7ff;
+    margin:12px 0;
+}
+
+/* CULORI */
+
+.color-lab{
+    margin-top:35px;
+    padding:30px;
+    border-radius:25px;
+    background:#fff;
+    box-shadow:0 8px 25px rgba(40,30,70,.1);
+}
+
+.color-preview{
+    height:130px;
+    border-radius:20px;
+    background:#a777e3;
+    margin:20px 0;
+    transition:.35s;
+    display:grid;
+    place-items:center;
+    color:white;
+    font-weight:bold;
+}
+
+input[type=range]{
+    width:100%;
+    accent-color:#6c4bc4;
+}
+
+.swatches{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.swatch{
+    width:42px;
+    height:42px;
+    border:3px solid white;
+    border-radius:50%;
+    cursor:pointer;
+    box-shadow:0 2px 8px #aaa;
+    transition:.25s;
+}
+
+.swatch:hover{
+    transform:scale(1.18);
+}
+
+/* FAKE NEWS */
+
+.fake{
+    background:linear-gradient(135deg,#f9d9ec,#eee8ff);
+}
+
+.news{
+    max-width:850px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(40,30,70,.12);
+}
+
+.news-head{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.source{
+    font-size:13px;
+    color:#777;
+}
+
+.claim{
+    padding:22px;
+    background:#f5f3ff;
+    border-radius:18px;
+    font-size:19px;
+}
+
+.evidence{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:18px;
+}
+
+.evidence button{
+    border:2px solid #d9c7ff;
+    background:#fff;
+    padding:14px;
+    border-radius:14px;
+    cursor:pointer;
+    text-align:left;
+    transition:.3s;
+}
+
+.evidence button:hover{
+    background:#eee8ff;
+    transform:translateY(-3px);
+}
+
+.result{
+    margin-top:20px;
+    padding:18px;
+    border-radius:15px;
+    display:none;
+}
+
+/* SCENARII */
+
+.scenario{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 9px 30px rgba(40,30,70,.1);
+}
+
+.choice{
+    width:100%;
+    padding:15px;
+    margin-top:12px;
+    border-radius:14px;
+    border:2px solid #d9c7ff;
+    background:#f5f3ff;
+    text-align:left;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.choice:hover{
+    transform:translateX(7px);
+    background:#e9e0ff;
+}
+
+.feedback{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+    border-radius:15px;
+    background:#eee8ff;
+}
+
+/* AI */
+
+.ai{
+    background:#211b3d;
+    color:white;
+}
+
+.ai h2{
+    color:white;
+}
+
+.ai .desc{
+    color:#b3a7d6;
+}
+
+.ai-card{
+    background:#2d2552;
+    border:1px solid #6c4bc4;
+    border-radius:20px;
+    padding:28px;
+    transition:.4s;
+}
+
+.ai-card:hover{
+    transform:translateY(-10px) rotate(1deg);
+    background:#3b3266;
+}
+
+.ai-card h3{
+    color:#c9a7ff;
+    margin-bottom:8px;
+}
+
+/* RESPONSABILITATE */
+
+.resp{
+    background:#eee8ff;
+}
+
+.resp-list{
+    max-width:850px;
+    margin:auto;
+    list-style:none;
+}
+
+.resp-list li{
+    background:white;
+    padding:20px 23px;
+    border-radius:16px;
+    margin:13px 0;
+    box-shadow:0 4px 14px rgba(40,30,70,.08);
+    transition:.35s;
+}
+
+.resp-list li:hover{
+    transform:translateX(10px);
+}
+
+/* QUIZ */
+
+.quiz{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:38px;
+    border-radius:26px;
+    box-shadow:0 10px 30px rgba(40,30,70,.11);
+}
+
+.q{
+    padding:25px 0;
+    border-bottom:1px solid #eee;
+}
+
+.q:last-child{
+    border-bottom:0;
+}
+
+.q button{
+    display:block;
+    width:100%;
+    margin:9px 0;
+    padding:13px;
+    border:2px solid #d9c7ff;
+    background:#f5f3ff;
+    border-radius:12px;
+    text-align:left;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.q button:hover{
+    background:#e9e0ff;
+}
+
+.q button.correct{
+    background:#d1fae5;
+    border-color:#10b981;
+}
+
+.q button.
+[28.09.2026 21:12] Yoma: wrong{
+    background:#fee2e2;
+    border-color:#ef4444;
+}
+
+.score{
+    margin-top:25px;
+    text-align:center;
+    font-size:23px;
+    font-weight:bold;
+    color:#493580;
+}
+
+/* PISICA */
+
+.cat-guide{
+    position:fixed;
+    right:20px;
+    bottom:25px;
+    width:145px;
+    z-index:2500;
+    cursor:pointer;
+    filter:drop-shadow(0 8px 15px rgba(40,30,70,.22));
+    animation:catFloat 3.2s ease-in-out infinite;
+}
+
+.cat-guide img{
+    width:100%;
+    display:block;
+    border-radius:50%;
+    border:4px solid white;
+    background:#f9d9ec;
+    transition:.35s;
+}
+
+.cat-guide:hover img{
+    transform:scale(1.06) rotate(2deg);
+}
+
+.cat-bubble{
+    position:absolute;
+    right:105%;
+    bottom:55%;
+    width:250px;
+    background:white;
+    padding:15px 18px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(40,30,70,.2);
+    color:#25233a;
+    display:none;
+}
+
+.cat-bubble:after{
+    content:"";
+    position:absolute;
+    right:-10px;
+    bottom:18px;
+    border-width:8px 0 8px 12px;
+    border-style:solid;
+    border-color:transparent transparent transparent white;
+}
+
+.cat-guide.talk{
+    animation:catTalk .7s;
+}
+
+/* BUTON SUS */
+
+#top{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:50px;
+    height:50px;
+    border:0;
+    border-radius:50%;
+    background:#6c4bc4;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:2400;
+}
+
+#top.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+#top:hover{
+    transform:translateY(-5px);
+}
+
+/* FOOTER */
+
+footer{
+    background:#211b3d;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:800px){
+
+    nav{
+        flex-direction:column;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes floating {
-    0%,100% {
-        transform: translateY(0);
+    .hero h1{
+        font-size:38px;
     }
 
-    50% {
-        transform: translateY(-25px);
-    }
-}
-
-@keyframes pulse {
-    0%,100% {
-        transform: scale(1);
+    .lab-layout{
+        grid-template-columns:1fr;
     }
 
-    50% {
-        transform: scale(1.08);
-    }
-}
-
-@keyframes glow {
-    0%,100% {
-        box-shadow: 0 0 10px rgba(139,92,246,0.2);
+    .tool-grid{
+        grid-template-columns:1fr;
     }
 
-    50% {
-        box-shadow: 0 0 30px rgba(139,92,246,0.6);
-    }
-}
-
-@keyframes catWalk {
-    0% {
-        transform: translateX(0);
+    .evidence{
+        grid-template-columns:1fr;
     }
 
-    50% {
-        transform: translateX(12px);
+    .cat-guide{
+        width:100px;
+        right:10px;
+        bottom:15px;
     }
 
-    100% {
-        transform: translateX(0);
+    .cat-bubble{
+        right:105%;
+        width:210px;
     }
 }
-
-@keyframes sparkle {
-    0% {
-        opacity: 0;
-        transform: scale(0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(0);
-    }
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header {
-    background: #211b3d;
-    color: white;
-    padding: 15px 7%;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.2);
-    animation: fadeDown 0.7s ease;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo {
-    font-size: 21px;
-    font-weight: bold;
-}
-
-.nav-links {
-    display: flex;
-    gap: 18px;
-    list-style: none;
-    flex-wrap: wrap;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: #c9a7ff;
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-    min-height: 85vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-[28.09.2026 21:02] Yoma: padding: 70px 20px;
-    background: linear-gradient(
-        135deg,
-        #d9c7ff,
-        #f9d9ec,
-        #d9c7ff
-    );
-    background-size: 300% 300%;
-    animation: gradientMove 12s ease infinite;
-    position: relative;
-    overflow: hidden;
-}
-
-@keyframes gradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.hero-content {
-    max-width: 900px;
-    animation: fadeUp 1s ease;
-}
-
-.hero h1 {
-    font-size: 52px;
-    color: #211b3d;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 21px;
-    max-width: 700px;
-    margin: auto;
-    margin-bottom: 30px;
-}
-
-.button {
-    display: inline-block;
-    padding: 14px 30px;
-    background: #6c4bc4;
-    color: white;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.button:hover {
-    transform: translateY(-5px) scale(1.04);
-    background: #51349c;
-}
-
-/* =========================================================
-   SECTIUNI
-========================================================= */
-
-section {
-    padding: 80px 8%;
-}
-
-section h2 {
-    text-align: center;
-    font-size: 35px;
-    color: #3d2d72;
-    margin-bottom: 20px;
-}
-
-.section-desc {
-    text-align: center;
-    max-width: 800px;
-    margin: auto;
-    color: #524b70;
-    font-size: 17px;
-}
-
-/* =========================================================
-   INFO CARDS
-========================================================= */
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
-
-.info-card {
-    background: rgba(255,255,255,0.85);
-    padding: 30px;
-    border-radius: 22px;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(40,30,70,0.1);
-    transition: 0.4s;
-}
-
-.info-card:hover {
-    transform: translateY(-10px) rotate(1deg);
-    box-shadow: 0 15px 35px rgba(40,30,70,0.18);
-}
-
-.info-card .icon {
-    font-size: 45px;
-    margin-bottom: 15px;
-}
-
-.info-card h3 {
-    color: #493580;
-    margin-bottom: 10px;
-}
-
-/* =========================================================
-   CAT GUIDE
-========================================================= */
-
-.cat-guide {
-    position: fixed;
-    right: 25px;
-    bottom: 90px;
-    width: 90px;
-    z-index: 1500;
-    cursor: pointer;
-    animation: catWalk 3s ease-in-out infinite;
-}
-
-.cat-body {
-    background: #f3d4ff;
-    border: 3px solid #6c4bc4;
-    border-radius: 50% 50% 45% 45%;
-    padding: 15px 10px;
-    text-align: center;
-    font-size: 42px;
-    box-shadow: 0 8px 20px rgba(60,40,100,0.2);
-}
-
-.cat-message {
-    position: absolute;
-    right: 0;
-    bottom: 100%;
-    width: 240px;
-    background: white;
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-    display: none;
-    font-size: 14px;
-}
-
-.cat-guide:hover .cat-message {
-    display: block;
-}
-
-/* =========================================================
-   LEARNING PATH
-========================================================= */
-
-.learning-path {
-    background: #eee8ff;
-}
-
-.steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
-
-.step {
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
-    text-align: center;
-    position: relative;
-    transition: 0.4s;
-}
-
-.step:hover {
-    transform: scale(1.04);
-}
-
-.step-number {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: auto auto 15px;
-    background: #6c4bc4;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-/* =========================================================
-   LABORATOR
-========================================================= */
-
-.lab-section {
-    background: #1a1530;
-    color: white;
-    border-radius: 30px;
-    margin: 50px 6%;
-    padding: 60px 30px;
-}
-
-.lab-section h2 {
-    color: white;
-}
-
-.lab-section .section-desc {
-    color: #b3a7d6;
-}
-
-.lab {
-[28.09.2026 21:02] Yoma: display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    margin-top: 40px;
-}
-
-.lab-buttons {
-    max-width: 450px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-.tool-btn {
-    background: #2d2552;
-    color: white;
-    border: 2px solid #6c4bc4;
-    padding: 15px 20px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.tool-btn:hover,
-.tool-btn.active {
-    background: #6c4bc4;
-    transform: translateY(-5px);
-}
-
-.lab-display {
-    width: 420px;
-    min-height: 280px;
-    background: #251f42;
-    border-radius: 25px;
-    padding: 35px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    animation: glow 3s infinite;
-}
-
-.lab-icon {
-    font-size: 65px;
-    margin-bottom: 15px;
-}
-
-/* =========================================================
-   FAKE NEWS GAME
-========================================================= */
-
-.fake-news {
-    background: linear-gradient(135deg,#f9d9ec,#eee8ff);
-}
-
-.news-card {
-    max-width: 700px;
-    margin: 40px auto;
-    background: white;
-    border-radius: 25px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(40,30,70,0.12);
-}
-
-.news-image {
-    height: 170px;
-    border-radius: 18px;
-    background: linear-gradient(135deg,#6c4bc4,#d9c7ff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 70px;
-    margin-bottom: 20px;
-}
-
-.news-buttons {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.news-buttons button {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    background: #eee8ff;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.news-buttons button:hover {
-    background: #c9a7ff;
-}
-
-/* =========================================================
-   COPYRIGHT
-========================================================= */
-
-.copyright-box {
-    max-width: 900px;
-    margin: 40px auto;
-}
-
-.copyright-item {
-    background: white;
-    padding: 20px;
-    margin: 15px 0;
-    border-radius: 15px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(40,30,70,0.1);
-    transition: 0.3s;
-}
-
-.copyright-item:hover {
-    transform: translateX(8px);
-}
-
-.copyright-answer {
-    display: none;
-    margin-top: 12px;
-    color: #524b70;
-}
-
-/* =========================================================
-   AI SECTION
-========================================================= */
-
-.ai-section {
-    background: #211b3d;
-    color: white;
-}
-
-.ai-section h2 {
-    color: white;
-}
-
-.ai-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
-
-.ai-card {
-    background: #2d2552;
-    border: 1px solid #6c4bc4;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    transition: 0.4s;
-}
-
-.ai-card:hover {
-    transform: translateY(-10px);
-    background: #3d326c;
-}
-
-/* =========================================================
-   SCENARIU
-========================================================= */
-
-.scenario {
-    max-width: 850px;
-    margin: auto;
-    background: white;
-    border-radius: 25px;
-    padding: 35px;
-    box-shadow: 0 8px 25px rgba(40,30,70,0.12);
-}
-
-.scenario-option {
-    display: block;
-    width: 100%;
-    margin-top: 15px;
-    padding: 15px;
-    background: #f5f3ff;
-    border: 2px solid #d9c7ff;
-    border-radius: 12px;
-    cursor: pointer;
-    text-align: left;
-    transition: 0.3s;
-}
-
-.scenario-option:hover {
-    background: #e9e0ff;
-    transform: translateX(5px);
-}
-
-#scenarioResult {
-    margin-top: 20px;
-    padding: 20px;
-    background: #eee8ff;
-    border-radius: 15px;
-    display: none;
-}
-
-/* =========================================================
-   GALERIE
-========================================================= */
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
-
-.art {
-    height: 230px;
-    border-radius: 25px;
-    display: flex;
-    justify-content: center;
-[28.09.2026 21:02] Yoma: align-items: center;
-    font-size: 80px;
-    background: linear-gradient(135deg,#d9c7ff,#f9d9ec);
-    cursor: pointer;
-    transition: 0.5s;
-    box-shadow: 0 8px 25px rgba(40,30,70,0.12);
-}
-
-.art:hover {
-    transform: rotate(3deg) scale(1.06);
-}
-
-/* =========================================================
-   RESPONSABILITATE
-========================================================= */
-
-.responsibility {
-    background: #eee8ff;
-}
-
-.resp-list {
-    max-width: 850px;
-    margin: 40px auto;
-    list-style: none;
-}
-
-.resp-list li {
-    background: white;
-    margin-bottom: 15px;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(40,30,70,0.08);
-    transition: 0.3s;
-}
-
-.resp-list li:hover {
-    transform: translateX(10px);
-}
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-.quiz {
-    max-width: 850px;
-    margin: auto;
-    background: white;
-    padding: 40px;
-    border-radius: 25px;
-    box-shadow: 0 8px 30px rgba(40,30,70,0.12);
-}
-
-.quiz-question {
-    margin-bottom: 35px;
-}
-
-.quiz-option {
-    display: block;
-    width: 100%;
-    padding: 14px;
-    margin: 10px 0;
-    border-radius: 12px;
-    border: 2px solid #d9c7ff;
-    background: #f5f3ff;
-    cursor: pointer;
-    text-align: left;
-    transition: 0.3s;
-}
-
-.quiz-option:hover {
-    background: #e9e0ff;
-}
-
-.quiz-option.correct {
-    background: #d1fae5;
-    border-color: #10b981;
-}
-
-.quiz-option.wrong {
-    background: #fee2e2;
-    border-color: #ef4444;
-}
-
-#quizScore {
-    margin-top: 25px;
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-    background: #211b3d;
-    color: white;
-    text-align: center;
-    padding: 35px;
-}
-
-/* =========================================================
-   TOP BUTTON
-========================================================= */
-
-#topButton {
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    width: 50px;
-    height: 50px;
-    border: none;
-    border-radius: 50%;
-    background: #6c4bc4;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s;
-    z-index: 2000;
-}
-
-#topButton.show {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:700px) {
-
-    .hero h1 {
-        font-size: 35px;
-    }
-
-    nav {
-        flex-direction: column;
-    }
-
-    .nav-links {
-        justify-content: center;
-    }
-
-    .cat-guide {
-        right: 10px;
-        bottom: 80px;
-        transform: scale(0.8);
-    }
-
-    .news-buttons {
-        flex-direction: column;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
-
-<div class="background-shapes">
-    <div class="shape one"></div>
-    <div class="shape two"></div>
-    <div class="shape three"></div>
+<!-- PROGRES -->
+<div class="progress">
+    <i id="progress"></i>
 </div>
 
-<!-- PROGRESS -->
-
-<div class="progress-container">
-    <div class="progress-bar" id="progressBar"></div>
-</div>
-
-<!-- HEADER -->
-
+<!-- MENIU -->
 <header>
-
 <nav>
 
 <div class="logo">
 🎨 Cultura Informațională
 </div>
 
-<ul class="nav-links">
-
+<ul class="nav">
 <li><a href="#despre">Despre</a></li>
-<li><a href="#exploreaza">Explorează</a></li>
+<li><a href="#carti">Concepte</a></li>
 <li><a href="#laborator">Laborator</a></li>
-<li><a href="#fake-news">Fake News</a></li>
+<li><a href="#fake">Fake News</a></li>
 <li><a href="#copyright">Copyright</a></li>
 <li><a href="#ai">AI</a></li>
 <li><a href="#quiz">Quiz</a></li>
-
 </ul>
 
 </nav>
-
 </header>
-
-
-<!-- PISICUȚA -->
-
-<div class="cat-guide">
-
-<div class="cat-body">
-🐱
-</div>
-
-<div class="cat-message">
-
-<strong>Salut! Eu sunt Mia! 🐾</strong>
-
-<br><br>
-
-Te voi ajuta să explorezi site-ul.
-
-Apasă pe elementele interactive și încearcă activitățile!
-
-</div>
-
-</div>
 
 
 <!-- HERO -->
@@ -913,17 +944,23 @@ Apasă pe elementele interactive și încearcă activitățile!
 
 <div class="hero-content">
 
+<span class="badge">
+💡 Site interactiv
+</span>
+
 <h1>
-Cultura informațională și rolul artistului
+Cultura informațională<br>
+și rolul artistului
 </h1>
 
 <p>
-Descoperă cum informația, arta și tehnologia se întâlnesc în lumea digitală.
-[28.09.2026 21:02] Yoma: Învață prin explorare, jocuri și activități interactive.
+Descoperă prin jocuri, animații și experimente
+cum informația, arta și tehnologia se întâlnesc
+în lumea digitală.
 </p>
 
-<a href="#despre" class="button">
-Începe aventura ✨
+<a class="btn" href="#despre">
+🚀 Începe explorarea
 </a>
 
 </div>
@@ -933,71 +970,54 @@ Descoperă cum informația, arta și tehnologia se întâlnesc în lumea digital
 
 <!-- DESPRE -->
 
-<section id="despre">
+<section id="despre" class="reveal">
 
 <h2>
-Ce este cultura informațională?
+🔎 Ce este cultura informațională?
 </h2>
 
-<p class="section-desc">
-
+<p class="desc">
 Cultura informațională reprezintă capacitatea de a găsi,
-înțelege, verifica, analiza și utiliza informația într-un mod
-corect, responsabil și etic.
-
+înțelege, analiza, verifica și utiliza informația într-un
+mod responsabil și etic.
 </p>
 
 <div class="info-grid">
 
 <div class="info-card">
-
 <div class="icon">🔎</div>
-
 <h3>Căutarea</h3>
-
 <p>
-Să știm unde și cum să găsim informații relevante.
+Să știi unde să cauți informații și să identifici
+sursele relevante.
 </p>
-
 </div>
 
-
 <div class="info-card">
-
 <div class="icon">🧠</div>
-
 <h3>Analiza</h3>
-
 <p>
-Să putem diferenția informația corectă de cea falsă.
+Să compari informațiile și să observi dacă există
+dovezi care susțin afirmațiile.
 </p>
-
 </div>
 
-
 <div class="info-card">
-
-<div class="icon">💡</div>
-
-<h3>Înțelegerea</h3>
-
+<div class="icon">✅</div>
+<h3>Verificarea</h3>
 <p>
-Să interpretăm informația și să înțelegem contextul.
+Să verifici autorul, data, sursa și contextul
+înainte de a distribui ceva.
 </p>
-
 </div>
 
-
 <div class="info-card">
-
 <div class="icon">⚖️</div>
-
-<h3>Responsabilitatea</h3>
-
+<h3>Utilizarea responsabilă</h3>
 <p>
-Să folosim și distribuim informația în mod etic.
+Să folosești informația respectând creatorii,
+drepturile și publicul.
 </p>
-
 </div>
 
 </div>
@@ -1005,70 +1025,218 @@ Să folosim și distribuim informația în mod etic.
 </section>
 
 
-<!-- TRASEU -->
+<!-- CUM ÎNVAȚĂ UTILIZATORUL -->
 
-<section id="exploreaza" class="learning-path">
+<section class="learning reveal">
 
 <h2>
-🧭 Traseul unui utilizator informat
+🧭 Cum verifici o informație?
 </h2>
 
-<p class="section-desc">
-
-Urmează pașii pentru a înțelege cum trebuie abordată o informație nouă.
-
+<p class="desc">
+[28.09.2026 21:12] Yoma: Urmează pașii de mai jos atunci când întâlnești
+o informație nouă pe Internet.
 </p>
 
 <div class="steps">
 
 <div class="step">
+<div class="num">1</div>
+<h3>Oprește-te</h3>
+<p>
+Nu distribui imediat informația.
+</p>
+</div>
 
-<div class="step-number">1</div>
+<div class="step">
+<div class="num">2</div>
+<h3>Identifică sursa</h3>
+<p>
+Cine a creat informația?
+</p>
+</div>
 
-<h3>Găsește</h3>
+<div class="step">
+<div class="num">3</div>
+<h3>Caută dovezi</h3>
+<p>
+Vezi dacă există alte surse independente.
+</p>
+</div>
+
+<div class="step">
+<div class="num">4</div>
+<h3>Verifică contextul</h3>
+<p>
+Când și unde a fost realizată informația?
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CARTI -->
+
+<section id="carti" class="reveal">
+
+<h2>
+📚 Cărțile cunoașterii
+</h2>
+
+<p class="desc">
+Apropie mouse-ul de fiecare carte sau apasă pe ea.
+Cărțile se rotesc și ascund informații suplimentare.
+</p>
+
+<div class="books">
+
+
+<div class="book"
+onclick="this.classList.toggle('open')">
+
+<div class="book-inner">
+
+<div class="book-face book-front">
+
+<div class="book-cover">
+🔎
+</div>
+
+<h3>Informația</h3>
 
 <p>
-Caută informația din mai multe surse.
+Ce trebuie să observi?
 </p>
 
 </div>
 
+<div class="book-face book-back">
 
-<div class="step">
-
-<div class="step-number">2</div>
-
-<h3>Verifică</h3>
+<h3>
+Informația corectă
+</h3>
 
 <p>
-Analizează autorul, data și sursa.
+O informație trebuie analizată prin sursă,
+autor, dată, dovezi și context.
 </p>
 
 </div>
 
-
-<div class="step">
-
-<div class="step-number">3</div>
-
-<h3>Compară</h3>
-
-<p>
-Compară informația cu alte surse.
-</p>
+</div>
 
 </div>
 
 
-<div class="step">
+<div class="book"
+onclick="this.classList.toggle('open')">
 
-<div class="step-number">4</div>
+<div class="book-inner">
 
-<h3>Folosește</h3>
+<div class="book-face book-front">
+
+<div class="book-cover">
+©️
+</div>
+
+<h3>Drepturile de autor</h3>
 
 <p>
-Utilizează informația responsabil.
+Apasă pentru explicație.
 </p>
+
+</div>
+
+<div class="book-face book-back">
+
+<h3>
+Copyright
+</h3>
+
+<p>
+O imagine sau o lucrare găsită online
+nu devine automat liberă pentru reutilizare.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="book"
+onclick="this.classList.toggle('open')">
+
+<div class="book-inner">
+
+<div class="book-face book-front">
+
+<div class="book-cover">
+🎨
+</div>
+
+<h3>Artistul digital</h3>
+
+<p>
+Descoperă rolul său.
+</p>
+
+</div>
+
+<div class="book-face book-back">
+
+<h3>
+Artistul informat
+</h3>
+
+<p>
+Artistul trebuie să știe să caute referințe,
+să verifice informații și să respecte creatorii.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="book"
+onclick="this.classList.toggle('open')">
+
+<div class="book-inner">
+
+<div class="book-face book-front">
+
+<div class="book-cover">
+🤖
+</div>
+
+<h3>Inteligența Artificială</h3>
+
+<p>
+Apasă pentru detalii.
+</p>
+
+</div>
+
+<div class="book-face book-back">
+
+<h3>
+AI și creativitatea
+</h3>
+
+<p>
+AI poate fi un instrument pentru idei și
+experimentare, dar rezultatele trebuie analizate.
+</p>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1079,69 +1247,143 @@ Utilizează informația responsabil.
 
 <!-- LABORATOR -->
 
-<section id="laborator" class="lab-section">
+<section id="laborator" class="lab-section reveal">
 
 <h2>
 🎨 Studio-ul virtual al artistului
 </h2>
 
-<p class="section-desc">
-
-Apasă pe fiecare instrument și descoperă cum contribuie
-tehnologia la procesul artistic.
-
+<p class="desc">
+Apasă pe instrumente și vezi imediat cum se schimbă
+informația din panoul interactiv.
 </p>
 
-<div class="lab">
 
-<div class="lab-buttons">
+<div class="lab-layout">
 
-<button class="tool-btn active"
-onclick="changeTool('brush',this)">
+<div class="tool-grid">
+
+
+<button class="tool active"
+onclick="selectTool('brush',this)">
 🖌️ Pensula
 </button>
 
-<button class="tool-btn"
-onclick="changeTool('color',this)">
-🎨 Culori
-</button>
 
-<button class="tool-btn"
-onclick="changeTool('layers',this)">
+<button class="tool"
+onclick="selectTool('layers',this)">
 📚 Layers
 </button>
 
-<button class="tool-btn"
-onclick="changeTool('light',this)">
-💡 Lumină
+
+<button class="tool"
+onclick="selectTool('color',this)">
+🎨 Culoarea
 </button>
 
-<button class="tool-btn"
-onclick="changeTool('reference',this)">
-🖼️ Referință
+
+<button class="tool"
+onclick="selectTool('light',this)">
+💡 Lumina
 </button>
+
+
+<button class="tool"
+onclick="selectTool('reference',this)">
+🖼️ Referința
+</button>
+
+
+<button class="tool"
+onclick="selectTool('export',this)">
+💾 Exportul
+</button>
+
 
 </div>
 
 
-<div class="lab-display">
+<div class="display">
 
-<div class="lab-icon" id="labIcon">
+<div
+id="toolIcon"
+class="display-icon">
 🖌️
 </div>
 
-<h3 id="labTitle">
+<h3 id="toolTitle">
 Pensula digitală
 </h3>
 
-<p id="labText">
-
-Pensula digitală permite artistului să creeze linii,
-texturi și forme folosind diferite setări.
-
+<p id="toolText">
+Pensula controlează linia, grosimea, opacitatea
+și textura. Ea transformă gestul artistului
+într-o imagine digitală.
 </p>
 
 </div>
+
+</div>
+
+
+<!-- EXPERIMENT CULORI -->
+
+<div class="color-lab">
+
+<h3 style="color:#493580">
+🌈 Experimentează cu atmosfera culorilor
+</h3>
+
+<p>
+Apasă pe o culoare și observă cum se schimbă
+panoul.
+</p>
+
+<div
+id="colorPreview"
+class="color-preview">
+Atmosferă vizuală
+</div>
+
+<div class="swatches">
+
+<button
+class="swatch"
+style="background:#a777e3"
+onclick="setColor('#a777e3','Mov — creativitate')">
+</button>
+
+<button
+class="swatch"
+style="background:#f29bc2"
+onclick="setColor('#f29bc2','Roz — energie')">
+</button>
+
+<button
+[28.09.2026 21:12] Yoma: class="swatch"
+style="background:#6e8efb"
+onclick="setColor('#6e8efb','Albastru — calm')">
+</button>
+
+<button
+class="swatch"
+style="background:#f5c451"
+onclick="setColor('#f5c451','Galben — atenție')">
+</button>
+
+<button
+class="swatch"
+style="background:#72c99b"
+onclick="setColor('#72c99b','Verde — echilibru')">
+</button>
+
+</div>
+
+<p
+id="colorText"
+style="margin-top:15px;font-weight:bold;color:#493580">
+Alege o culoare.
+</p>
 
 </div>
 
@@ -1150,52 +1392,66 @@ texturi și forme folosind diferite setări.
 
 <!-- FAKE NEWS -->
 
-<section id="fake-news" class="fake-news">
+<section id="fake" class="fake reveal">
 
 <h2>
-🔍 Detectivul informațional
+🕵️ Detectivul informației
 </h2>
 
-<p class="section-desc">
-
-Imaginează-ți că ai primit această postare.
-Tu trebuie să decizi dacă informația pare credibilă.
-
+<p class="desc">
+Ai primit o afirmație online. Investighează elementele
+ei înainte să decizi dacă poate fi considerată credibilă.
 </p>
 
-<div class="news-card">
+<div class="news">
 
-<div class="news-image">
-📰
+<div class="news-head">
+
+<h3>📰 Știre virală</h3>
+
+<span class="source">
+Sursa: necunoscută
+</span>
+
 </div>
 
-<h3>
-„Un artist a creat o imagine virală folosind o aplicație.
-Imaginea reprezintă un eveniment real.”
-</h3>
+<div class="claim">
+
+„Această imagine demonstrează că un eveniment
+s-a întâmplat ieri.”
+
+</div>
 
 <p style="margin-top:15px">
-
-Postarea nu oferă autorul imaginii, sursa originală,
-data fotografiei sau alte dovezi.
-
+<strong>
+Ce trebuie să verifici?
+</strong>
 </p>
 
-<div class="news-buttons">
+<div class="evidence">
 
-<button onclick="checkNews(false)">
-❌ Aș distribui-o
+<button onclick="inspectEvidence(0)">
+👤 Cine este autorul?
 </button>
 
-<button onclick="checkNews(true)">
-🔎 Aș verifica sursa
+<button onclick="inspectEvidence(1)">
+📅 Care este data?
+</button>
+
+<button onclick="inspectEvidence(2)">
+🔗 Unde este sursa originală?
+</button>
+
+<button onclick="inspectEvidence(3)">
+🌍 Care este contextul?
 </button>
 
 </div>
 
-<p id="newsResult"
-style="margin-top:20px;font-weight:bold;">
-</p>
+<div
+id="evidenceResult"
+class="result">
+</div>
 
 </div>
 
@@ -1204,61 +1460,96 @@ style="margin-top:20px;font-weight:bold;">
 
 <!-- COPYRIGHT -->
 
-<section id="copyright">
+<section id="copyright" class="reveal">
 
 <h2>
-©️ Drepturile de autor în artă
+©️ Artistul și drepturile de autor
 </h2>
 
-<p class="section-desc">
-
-Un artist trebuie să respecte atât propria muncă,
-cât și munca altor creatori.
-
-Apasă pe situații pentru a vedea explicația.
-
+<p class="desc">
+Înainte să folosești o imagine, un model sau o altă
+creație găsită online, trebuie să fii atent la sursă
+și la condițiile de utilizare.
 </p>
 
-<div class="copyright-box">
-
-<div class="copyright-item"
-onclick="toggleCopyright(0)">
-
-<strong>🎨 Pot folosi orice imagine găsită pe Internet?</strong>
-
-<p class="copyright-answer">
-Nu întotdeauna. Unele imagini sunt protejate prin drepturi de autor.
-[28.09.2026 21:02] Yoma: Trebuie verificată licența și condițiile de utilizare.
-</p>
-
-</div>
+<div class="info-grid">
 
 
-<div class="copyright-item"
-onclick="toggleCopyright(1)">
+<div
+class="info-card"
+onclick="showInfo(
+'copyrightInfo',
+'O imagine găsită pe Internet poate avea o licență. Verifică dacă este permisă reutilizarea și în ce condiții.'
+)"
+style="cursor:pointer">
 
-<strong>✍️ Pot folosi o lucrare ca inspirație?</strong>
+<div class="icon">🖼️</div>
 
-<p class="copyright-answer">
-Inspirația este normală în procesul artistic, însă copierea unei
-lucrări fără permisiune sau fără atribuire poate încălca drepturile creatorului.
+<h3>
+Imagine găsită online
+</h3>
+
+<p>
+Apasă pentru explicație.
 </p>
 
 </div>
 
 
-<div class="copyright-item"
-onclick="toggleCopyright(2)">
+<div
+class="info-card"
+onclick="showInfo(
+'copyrightInfo',
+'Atribuirea înseamnă să recunoști creatorul și sursa atunci când condițiile licenței o cer sau când este relevant pentru context.'
+)"
+style="cursor:pointer">
 
-<strong>🔗 De ce este importantă menționarea sursei?</strong>
+<div class="icon">✍️</div>
 
-<p class="copyright-answer">
-Menționarea sursei ajută publicul să identifice creatorul
-și arată respect pentru munca acestuia.
+<h3>
+Atribuirea
+</h3>
+
+<p>
+Apasă pentru explicație.
 </p>
 
 </div>
 
+
+<div
+class="info-card"
+onclick="showInfo(
+'copyrightInfo',
+'Inspirația și copierea nu sunt același lucru. Este important să construiești o lucrare proprie și să respecți drepturile creatorului original.'
+)"
+style="cursor:pointer">
+
+<div class="icon">💡</div>
+
+<h3>
+Inspirație
+</h3>
+
+<p>
+Apasă pentru explicație.
+</p>
+
+</div>
+
+</div>
+
+<div
+id="copyrightInfo"
+style="
+max-width:850px;
+margin:25px auto 0;
+padding:20px;
+background:#eee8ff;
+border-radius:15px;
+text-align:center;
+display:none;
+">
 </div>
 
 </section>
@@ -1266,29 +1557,30 @@ Menționarea sursei ajută publicul să identifice creatorul
 
 <!-- AI -->
 
-<section id="ai" class="ai-section">
+<section id="ai" class="ai reveal">
 
 <h2>
-🤖 Artistul și Inteligența Artificială
+🤖 AI și artistul digital
 </h2>
 
-<p class="section-desc">
-
-AI poate deveni un instrument în procesul creativ.
-Important este să înțelegem cum îl folosim și ce informații
-prezentăm publicului.
-
+<p class="desc">
+Înțelege câteva dintre întrebările pe care un artist
+trebuie să le ia în considerare atunci când folosește
+instrumente AI.
 </p>
 
 <div class="ai-grid">
 
+
 <div class="ai-card">
 
-<h3>💡 Inspirație</h3>
+<h3>
+💭 Ideea
+</h3>
 
 <p>
-AI poate ajuta la generarea unor idei,
-forme sau direcții vizuale.
+AI poate fi folosit pentru brainstorming și
+explorarea unor direcții vizuale.
 </p>
 
 </div>
@@ -1296,11 +1588,14 @@ forme sau direcții vizuale.
 
 <div class="ai-card">
 
-<h3>🧩 Instrument</h3>
+<h3>
+🔎 Verificarea
+</h3>
 
 <p>
-Poate fi folosit ca parte a unui proces creativ,
-alături de alte instrumente digitale.
+Rezultatul trebuie analizat. Un instrument automat
+poate produce informații sau imagini care necesită
+verificare.
 </p>
 
 </div>
@@ -1308,11 +1603,14 @@ alături de alte instrumente digitale.
 
 <div class="ai-card">
 
-<h3>🔎 Verificare</h3>
+<h3>
+🧑‍🎨 Contribuția umană
+</h3>
 
 <p>
-Conținutul generat trebuie analizat înainte de a fi prezentat
-ca informație reală.
+Artistul poate folosi propriile decizii, editări,
+desen, compoziție și cunoștințe pentru a construi
+rezultatul final.
 </p>
 
 </div>
@@ -1320,11 +1618,13 @@ ca informație reală.
 
 <div class="ai-card">
 
-<h3>⚖️ Responsabilitate</h3>
+<h3>
+⚖️ Transparența
+</h3>
 
 <p>
-Artistul trebuie să fie atent la surse,
-drepturi și modul în care prezintă lucrarea.
+Este util să explici ce instrumente ai folosit
+atunci când contextul proiectului o cere.
 </p>
 
 </div>
@@ -1336,124 +1636,96 @@ drepturi și modul în care prezintă lucrarea.
 
 <!-- SCENARIU -->
 
-<section>
+<section class="reveal">
 
 <h2>
-🎮 Ce ai face dacă ai fi artistul?
+🎮 Tu ești artistul
 </h2>
 
-<p class="section-desc">
-
-Alege o acțiune și vezi ce principiu al culturii informaționale
-este implicat.
-
+<p class="desc">
+Alege ce ai face într-o situație reală.
 </p>
 
 <div class="scenario">
 
 <h3>
-Ai găsit o imagine foarte interesantă pe Internet.
-Vrei să o folosești într-un proiect.
-Ce faci?
+Ai găsit o fotografie perfectă pentru un concept
+de joc. Nu știi cine a făcut-o.
 </h3>
 
-<button class="scenario-option"
-onclick="scenarioAnswer(1)">
-A. O descarc și o folosesc imediat.
+
+<button
+class="choice"
+onclick="scenario(0)">
+A.
+[28.09.2026 21:12] Yoma: O pun direct în proiect.
 </button>
 
-<button class="scenario-option"
-onclick="scenarioAnswer(2)">
-B. Verific autorul și licența.
+
+<button
+class="choice"
+onclick="scenario(1)">
+B. Caut sursa originală și verific licența.
 </button>
 
-<button class="scenario-option"
-onclick="scenarioAnswer(3)">
-C. O modific puțin și nu mai verific nimic.
+
+<button
+class="choice"
+onclick="scenario(2)">
+C. O modific puțin și presupun că este liberă.
 </button>
 
-<div id="scenarioResult"></div>
 
-</div>
-
-</section>
-
-
-<!-- GALERIE -->
-
-<section>
-
-<h2>
-🖼️ Galeria ideilor digitale
-</h2>
-
-<p class="section-desc">
-
-Apasă pe fiecare creație pentru a descoperi legătura
-dintre artă și tehnologie.
-
-</p>
-
-<div class="gallery">
-
-<div class="art" onclick="artInfo('🎨 Arta digitală poate combina desenul tradițional cu instrumentele digitale.')">
-🎨
-</div>
-
-<div class="art" onclick="artInfo('🧊 Modelarea 3D permite crearea unor obiecte și personaje tridimensionale.')">
-🧊
-</div>
-
-<div class="art" onclick="artInfo('🎮 Game Design combină arta, tehnologia, povestirea și interacțiunea.')">
-🎮
-</div>
-
-<div class="art" onclick="artInfo('✨ Animația transformă imaginile statice într-o experiență vizuală dinamică.')">
-✨
+<div
+class="feedback"
+id="scenarioFeedback">
 </div>
 
 </div>
-
-<p id="artInfo"
-style="text-align:center;margin-top:25px;font-weight:bold;color:#493580;">
-</p>
 
 </section>
 
 
 <!-- RESPONSABILITATE -->
 
-<section class="responsibility">
+<section class="learning reveal">
 
 <h2>
-⚖️ Responsabilitatea artistului digital
+✨ Responsabilitatea artistului digital
 </h2>
+
+<p class="desc">
+Un artist digital lucrează cu imagini, informații,
+referințe și tehnologii. De aceea, responsabilitatea
+face parte din procesul creativ.
+</p>
 
 <ul class="resp-list">
 
 <li>
 🎨 <strong>Originalitate:</strong>
-crearea și prezentarea lucrărilor într-un mod corect.
+creează lucrări proprii și respectă munca altor artiști.
 </li>
 
 <li>
-🔎 <strong>Verificarea informației:</strong>
-sursele trebuie analizate înainte de distribuire.
+🔎 <strong>Verificarea:</strong>
+analizează sursele înainte de a distribui informații.
 </li>
 
 <li>
-©️ <strong>Respectarea creatorilor:</strong>
-drepturile de autor trebuie luate în considerare.
+©️ <strong>Copyright:</strong>
+respectă licențele și condițiile de utilizare.
 </li>
 
 <li>
-💬 <strong>Comunicarea:</strong>
-imaginile pot influența modul în care publicul percepe un mesaj.
+💬 <strong>Comunicare:</strong>
+înțelege că imaginile pot influența modul în care
+publicul percepe un mesaj.
 </li>
 
 <li>
-🤖 <strong>Utilizarea responsabilă a tehnologiei:</strong>
-instrumentele digitale trebuie folosite conștient.
+🤖 <strong>Tehnologie:</strong>
+folosește instrumentele digitale în mod conștient.
 </li>
 
 </ul>
@@ -1461,93 +1733,91 @@ instrumentele digitale trebuie folosite conștient.
 </section>
 
 
-<!-- QUIZ -->
+<!-- CE INSEAMNA ARTIST INFORMAT -->
 
-<section id="quiz">
-
-<div class="quiz">
+<section class="reveal">
 
 <h2>
-🧠 Test final
+🧠 Ce înseamnă să fii un artist informat?
 </h2>
 
-<p class="section-desc">
-Vezi cât ai reținut din explorarea site-ului!
+<p class="desc">
+Nu înseamnă doar să desenezi bine. Înseamnă și să
+înțelegi informația din jurul lucrării tale.
 </p>
 
-<div class="quiz-question">
+<div class="info-grid">
+
+
+<div class="info-card">
+
+<div class="icon">
+🧠
+</div>
 
 <h3>
-1. Ce trebuie făcut înainte de a distribui o informație?
+Gândește critic
 </h3>
 
-<button class="quiz-option"
-[28.09.2026 21:02] Yoma: onclick="quizAnswer(this,true)">
-A. Verificarea sursei
-</button>
-
-<button class="quiz-option"
-onclick="quizAnswer(this,false)">
-B. Distribuirea imediată
-</button>
-
-<button class="quiz-option"
-onclick="quizAnswer(this,false)">
-C. Ignorarea autorului
-</button>
+<p>
+Nu accepta automat prima informație pe care
+o întâlnești.
+</p>
 
 </div>
 
 
-<div class="quiz-question">
+<div class="info-card">
+
+<div class="icon">
+🔗
+</div>
 
 <h3>
-2. Ce este important când folosim imaginea altui artist?
+Urmărește sursa
 </h3>
 
-<button class="quiz-option"
-onclick="quizAnswer(this,true)">
-A. Verificarea drepturilor și licenței
-</button>
-
-<button class="quiz-option"
-onclick="quizAnswer(this,false)">
-B. Să eliminăm numele artistului
-</button>
-
-<button class="quiz-option"
-onclick="quizAnswer(this,false)">
-C. Să spunem că este lucrarea noastră
-</button>
+<p>
+Încearcă să ajungi la sursa originală,
+nu doar la o repostare.
+</p>
 
 </div>
 
 
-<div class="quiz-question">
+<div class="info-card">
+
+<div class="icon">
+🎯
+</div>
 
 <h3>
-3. Ce poate face un artist digital?
+Înțelege contextul
 </h3>
 
-<button class="quiz-option"
-onclick="quizAnswer(this,true)">
-A. Să combine creativitatea cu instrumentele digitale
-</button>
-
-<button class="quiz-option"
-onclick="quizAnswer(this,false)">
-B. Să ignore sursele
-</button>
-
-<button class="quiz-option"
-onclick="quizAnswer(this,false)">
-C. Să distribuie orice informație
-</button>
+<p>
+O imagine poate avea un sens diferit atunci
+când este scoasă din context.
+</p>
 
 </div>
 
-<div id="quizScore">
-Scor: 0
+
+<div class="info-card">
+
+<div class="icon">
+🌱
+</div>
+
+<h3>
+Învață continuu
+</h3>
+
+<p>
+Instrumentele și mediul digital se schimbă,
+iar artistul trebuie să se adapteze.
+</p>
+
 </div>
 
 </div>
@@ -1555,308 +1825,445 @@ Scor: 0
 </section>
 
 
+<!-- QUIZ -->
+
+<section id="quiz" class="reveal">
+
+<div class="quiz">
+
+<h2>
+🧠 Quiz final
+</h2>
+
+<p class="desc">
+Răspunde la întrebări. Scorul se actualizează imediat.
+</p>
+
+
+<div class="q">
+
+<h3>
+1. Ce trebuie verificat la o informație?
+</h3>
+
+<button onclick="quiz(this,true)">
+A. Sursa, autorul și contextul
+</button>
+
+<button onclick="quiz(this,false)">
+B. Doar numărul de aprecieri
+</button>
+
+<button onclick="quiz(this,false)">
+C. Doar imaginea
+</button>
+
+</div>
+
+
+<div class="q">
+
+<h3>
+2. Ce faci înainte să folosești imaginea altui creator?
+</h3>
+
+<button onclick="quiz(this,true)">
+A. Verifici drepturile și licența
+</button>
+
+<button onclick="quiz(this,false)">
+B. O copiezi fără să verifici
+</button>
+
+<button onclick="quiz(this,false)">
+C. Ștergi numele autorului
+</button>
+
+</div>
+
+
+<div class="q">
+
+<h3>
+3. De ce poate fi o imagine înșelătoare?
+</h3>
+
+<button onclick="quiz(this,true)">
+A. Poate fi editată sau scoasă din context
+</button>
+
+<button onclick="quiz(this,false)">
+B. Pentru că toate imaginile sunt false
+</button>
+
+<button onclick="quiz(this,false)">
+C. Pentru că imaginile nu transmit informații
+</button>
+
+</div>
+
+
+<div class="q">
+
+<h3>
+4. Cum poate fi folosit AI în procesul creativ?
+</h3>
+
+<button onclick="quiz(this,true)">
+A. Ca instrument pentru idei și experimentare
+</button>
+
+<button onclick="quiz(this,false)">
+B. Ca înlocuitor obligatoriu al artistului
+</button>
+
+<button onclick="quiz(this,false)">
+C. Fără să fie verificat rezultatul
+</button>
+
+</div>
+
+
+<div
+class="score"
+id="score">
+Scor: 0 / 4
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PISICA -->
+
+<div
+class="cat-guide"
+id="cat">
+
+<div
+class="cat-bubble"
+id="catBubble">
+</div>
+
+<img
+src="pisica.jpeg"
+alt="Pisica ghid">
+</div>
+
+
+<!-- SUS -->
+
+<button
+id="top"
+onclick="window.scrollTo({top:0,behavior:'smooth'})">
+↑
+</button>
+
+
 <!-- FOOTER -->
 
 <footer>
 
 <p>
-🐾 Mia îți mulțumește că ai explorat site-ul!
+🐾 Mia te felicită că ai ajuns până aici!
 </p>
 
-<p style="margin-top:10px;">
+<p style="margin-top:8px">
 © 2026 — Cultura informațională și rolul artistului
 </p>
-
-</footer>
-
-
-<!-- TOP -->
-
-<button id="topButton"
-onclick="scrollToTop()">
-↑
-</button>
+[28.09.2026 21:12] Yoma: </footer>
 
 
 <script>
 
-/* =========================================================
-   SCROLL PROGRESS
-========================================================= */
+/* PROGRES */
 
-window.addEventListener("scroll", function(){
+window.addEventListener("scroll",()=>{
 
-let scrollTop =
-document.documentElement.scrollTop;
+    const y=document.documentElement.scrollTop;
 
-let height =
-document.documentElement.scrollHeight -
-document.documentElement.clientHeight;
+    const h=
+        document.documentElement.scrollHeight-
+        document.documentElement.clientHeight;
 
-let progress =
-(scrollTop / height) * 100;
+    document.getElementById("progress").style.width=
+        (y/h*100)+"%";
 
-document.getElementById("progressBar")
-.style.width = progress + "%";
-
-
-const topButton =
-document.getElementById("topButton");
-
-if(scrollTop > 500){
-
-topButton.classList.add("show");
-
-}else{
-
-topButton.classList.remove("show");
-
-}
+    document
+        .getElementById("top")
+        .classList
+        .toggle("show",y>500);
 
 });
 
 
-function scrollToTop(){
+/* APARITIA SECTIUNILOR */
 
-window.scrollTo({
+const observer=
+new IntersectionObserver(entries=>{
 
-top:0,
+    entries.forEach(e=>{
 
-behavior:"smooth"
+        if(e.isIntersecting)
+            e.target.classList.add("visible");
+
+    });
+
+},{threshold:.12});
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(x=>observer.observe(x));
+
+
+/* PISICA */
+
+const cat=
+document.getElementById("cat");
+
+const catBubble=
+document.getElementById("catBubble");
+
+const catMessages=[
+
+"🐾 Încearcă să apropii mouse-ul de cărticelele de mai sus!",
+
+"🔎 În secțiunea Fake News trebuie să cauți dovezile.",
+
+"🎨 În laborator poți schimba instrumentele și culorile.",
+
+"©️ Nu uita: o imagine găsită online nu este automat liberă.",
+
+"🤖 AI poate fi un instrument, dar rezultatul trebuie înțeles și verificat.",
+
+"🧠 La final te așteaptă un quiz!"
+
+];
+
+
+cat.addEventListener("click",()=>{
+
+    cat.classList.remove("talk");
+
+    void cat.offsetWidth;
+
+    cat.classList.add("talk");
+
+    catBubble.innerHTML=
+        "<strong>🐾 Mia spune:</strong><br><br>"+
+        catMessages[
+            Math.floor(
+                Math.random()*catMessages.length
+            )
+        ];
+
+    catBubble.style.display="block";
+
+    setTimeout(()=>{
+        catBubble.style.display="";
+    },5000);
 
 });
 
-}
 
+/* LABORATOR */
 
-/* =========================================================
-   LABORATOR
-========================================================= */
+const tools={
 
-const tools = {
+brush:[
+"🖌️",
+"Pensula digitală",
+"Pensula controlează linia, grosimea, opacitatea și textura. Ea transformă gestul artistului într-o imagine digitală."
+],
 
-brush: {
+layers:[
+"📚",
+"Layers",
+"Straturile permit separarea personajelor, fundalului, umbrelor și efectelor. Astfel, o parte poate fi modificată fără a distruge restul."
+],
 
-icon:"🖌️",
+color:[
+"🎨",
+"Culoarea",
+"Culoarea poate modifica atmosfera unei scene. Armoniile cromatice ajută la transmiterea emoțiilor și la orientarea privirii."
+],
 
-title:"Pensula digitală",
+light:[
+"💡",
+"Lumina și umbra",
+"Lumina creează volum și profunzime. Direcția luminii poate schimba complet modul în care percepem un personaj sau un obiect."
+],
 
-text:"Pensula permite artistului să creeze linii, texturi și forme. Setările precum grosimea și opacitatea oferă control asupra rezultatului."
+reference:[
+"🖼️",
+"Referința",
+"Referințele sunt utile pentru anatomie, perspectivă, materiale, haine, arhitectură și lumină. Ele trebuie folosite conștient, nu copiate automat."
+],
 
-},
-
-color: {
-
-icon:"🎨",
-
-title:"Paleta de culori",
-
-text:"Culorile pot transmite emoții și pot influența modul în care privitorul percepe o imagine."
-
-},
-
-layers: {
-
-icon:"📚",
-
-title:"Straturile",
-
-text:"Layers permit separarea personajelor, fundalului, umbrelor și altor elemente pentru editare mai ușoară."
-
-},
-
-light: {
-
-icon:"💡",
-
-title:"Lumina și umbra",
-
-text:"Lumina și umbra pot crea volum, profunzime și pot direcționa atenția către anumite elemente."
-
-},
-
-reference: {
-
-icon:"🖼️",
-
-title:"Imaginea de referință",
-
-text:"Referințele pot ajuta artistul să înțeleagă anatomia, perspectiva, iluminarea și obiectele."
-
-}
+export:[
+"💾",
+"Exportul",
+"La export alegi formatul și calitatea potrivite pentru destinație: web, print, portofoliu sau joc."
+]
 
 };
 
 
-function changeTool(key,button){
+function selectTool(key,btn){
 
-document
-.querySelectorAll(".tool-btn")
-.forEach(btn =>
-btn.classList.remove("active")
-);
+    document
+        .querySelectorAll(".tool")
+        .forEach(x=>x.classList.remove("active"));
 
-button.classList.add("active");
+    btn.classList.add("active");
 
-let data = tools[key];
+    const d=tools[key];
 
-document.getElementById("labIcon")
-.innerText = data.icon;
+    const icon=
+        document.getElementById("toolIcon");
 
-document.getElementById("labTitle")
-.innerText = data.title;
+    icon.classList.remove("pop");
 
-document.getElementById("labText")
-.innerText = data.text;
+    void icon.offsetWidth;
 
-}
+    icon.classList.add("pop");
 
+    icon.textContent=d[0];
 
-/* =========================================================
-   FAKE NEWS
-========================================================= */
+    document.getElementById("toolTitle")
+        .textContent=d[1];
 
-function checkNews(correct){
-
-let result =
-document.getElementById("newsResult");
-
-if(correct){
-
-result.innerHTML =
-"✅ Corect! Înainte de distribuire este important să verificăm sursa, autorul, data și contextul informației.";
-
-result.style.color="#065f46";
-
-}else{
-
-result.innerHTML =
-"⚠️ Mai întâi verifică informația. O imagine sau o postare virală nu reprezintă automat o dovadă.";
-
-result.style.color="#991b1b";
-
-}
-
-}
-[28.09.2026 21:02] Yoma: /* =========================================================
-   COPYRIGHT
-========================================================= */
-
-function toggleCopyright(index){
-
-let answers =
-document.querySelectorAll(".copyright-answer");
-
-answers[index].style.display =
-answers[index].style.display === "block"
-? "none"
-: "block";
+    document.getElementById("toolText")
+        .textContent=d[2];
 
 }
 
 
-/* =========================================================
-   SCENARIU
-========================================================= */
+/* CULORI */
 
-function scenarioAnswer(answer){
+function setColor(color,text){
 
-let result =
-document.getElementById("scenarioResult");
+    document
+        .getElementById("colorPreview")
+        .style.background=color;
 
-result.style.display="block";
+    document
+        .getElementById("colorPreview")
+        .textContent=text;
 
-if(answer === 2){
-
-result.innerHTML =
-"🎉 Alegerea ta respectă cultura informațională. Verificarea autorului și a licenței te ajută să respecți drepturile creatorului.";
-
-}else{
-
-result.innerHTML =
-"💡 Înainte de utilizare este recomandat să verifici autorul și condițiile de utilizare ale imaginii.";
-
-}
+    document
+        .getElementById("colorText")
+        .textContent=
+        "Ai ales: "+text+
+        ". Observă cum se schimbă atmosfera vizuală.";
 
 }
 
 
-/* =========================================================
-   GALERIE
-========================================================= */
+/* FAKE NEWS */
 
-function artInfo(text){
+const evidence=[
 
-document.getElementById("artInfo")
-.innerText=text;
+"Autorul nu este identificat. Lipsa autorului nu demonstrează că informația este falsă, dar este un motiv să cauți o sursă mai clară.",
 
-}
+"Data nu este precizată. Fără dată, este mai greu să verifici dacă afirmația despre „ieri” este corectă.",
 
+"Nu este prezentată sursa originală. Caută imaginea sau afirmația în surse independente.",
 
-/* =========================================================
-   QUIZ
-========================================================= */
-
-let score = 0;
-
-function quizAnswer(button, correct){
-
-if(button.classList.contains("answered")){
-return;
-}
-
-button.classList.add("answered");
-
-if(correct){
-
-button.classList.add("correct");
-
-score++;
-
-}else{
-
-button.classList.add("wrong");
-
-}
-
-document.getElementById("quizScore")
-.innerText =
-"Scor: " + score;
-
-}
-
-
-/* =========================================================
-   CAT
-========================================================= */
-
-const cat =
-document.querySelector(".cat-guide");
-
-cat.addEventListener("click",function(){
-
-const messages = [
-
-"🐱 Bravo! Continuă să explorezi!",
-
-"🐾 Nu uita să verifici sursele!",
-
-"🎨 Arta și informația sunt strâns legate!",
-
-"🔎 Încearcă activitatea Fake News!",
-
-"🤖 Ai ajuns la secțiunea despre AI!",
-
-"✨ Mai ai puțin până la quiz!"
+"Contextul lipsește. Întreabă-te unde, când și în ce împrejurări a fost realizată imaginea."
 
 ];
 
-let random =
-messages[Math.floor(Math.random()*messages.length)];
 
-alert(random);
+function inspectEvidence(i){
 
-});
+    const r=
+        document.
+[28.09.2026 21:12] Yoma: getElementById("evidenceResult");
+
+    r.style.display="block";
+
+    r.style.background="#eee8ff";
+
+    r.innerHTML=
+        "🔎 <strong>Observație:</strong> "+
+        evidence[i];
+
+}
+
+
+/* COPYRIGHT */
+
+function showInfo(id,text){
+
+    const box=
+        document.getElementById(id);
+
+    box.style.display="block";
+
+    box.textContent=text;
+
+}
+
+
+/* SCENARIU */
+
+function scenario(choice){
+
+    const box=
+        document.getElementById("scenarioFeedback");
+
+    box.style.display="block";
+
+    if(choice===1){
+
+        box.innerHTML=
+        "🎉 Alegerea ta este cea mai sigură abordare: cauți creatorul și verifici condițiile de utilizare înainte să incluzi imaginea în proiect.";
+
+    }else{
+
+        box.innerHTML=
+        "💡 Înainte de utilizare, este recomandat să identifici sursa originală și să verifici licența. Faptul că o imagine este online nu înseamnă automat că poate fi reutilizată.";
+
+    }
+
+}
+
+
+/* QUIZ */
+
+let score=0;
+
+function quiz(btn,correct){
+
+    if(btn.parentElement.dataset.done==="1")
+        return;
+
+    btn.parentElement.dataset.done="1";
+
+    btn.parentElement
+        .querySelectorAll("button")
+        .forEach(b=>b.disabled=true);
+
+    if(correct){
+
+        btn.classList.add("correct");
+
+        score++;
+
+    }else{
+
+        btn.classList.add("wrong");
+
+    }
+
+    document.getElementById("score")
+        .textContent=
+        "Scor: "+score+" / 4";
+
+}
 
 </script>
 
