@@ -1,104 +1,702 @@
-<button class="quiz-option" onclick="checkAnswer(this, false)">A) Să o distribui imediat prietenilor</button>
-                <button class="quiz-option" onclick="checkAnswer(this, true)">B) Să controlezi dacă este credibilă și reală</button>
-                <button class="quiz-option" onclick="checkAnswer(this, false)">C) Să o ștergi din calculator</button>
-            </div>
+[28.09.2026 20:50] Yoma: În imagine se vede că în editor sunt doar 22 de linii de cod (începând direct de la o secțiune <section>). Acest lucru se întâmplă din două motive posibile:
+1. A fost lipit doar un fragment: Când ai dat Copy-Paste, s-a copiat sau selectat doar o bucată de la finalul codului, fără partea de sus (<!DOCTYPE html>, <head>, <style>, etc.).
+2. Înainte de a lipi, nu s-a șters tot: Posibil să fi rămas resturi sau să fi fost salvat doar un fragment.
+Cum rezolvi problema rapid:
+1. În editorul GitHub din imagine, apasă Ctrl + A (selectează tot) pe tastatură și apoi tasta Delete (șterge tot) ca să rămână pagina complet goală.
+2. Copiază din nou tot codul de mai jos (am adăugat mai jos o versiune complet curată și bine structurată).
+3. Lipiți-l în GitHub (Ctrl + V).
+4. Asigură-te că linia 1 începe cu <!DOCTYPE html>.
+Codul complet pentru index.html:
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultura informațională și rolul artistului</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f3ff;
+            color: #25233a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* BARĂ PROGRES SCROLL */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #a777e3, #6e8efb);
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* ANIMAȚII */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulseHint {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        /* MENIU DE NAVIGARE */
+        header {
+            background: #211b3d;
+            color: white;
+            padding: 15px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+            animation: fadeDown 0.7s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            position: relative;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #c9a7ff;
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #c9a7ff;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+[28.09.2026 20:50] Yoma: justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #d9c7ff, #f9d9ec);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before, .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        .hero::before { width: 180px; height: 180px; top: 10%; left: 8%; }
+        .hero::after { width: 250px; height: 250px; bottom: -80px; right: 5%; animation-delay: 1s; }
+
+        .hero-content {
+            max-width: 850px;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 1s ease;
+        }
+
+        .hero h1 { font-size: 48px; margin-bottom: 20px; color: #211b3d; }
+        .hero p { font-size: 20px; margin-bottom: 30px; }
+
+        .button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #6c4bc4;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108,75,196,0.3);
+        }
+
+        .button:hover {
+            background: #51349c;
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(108,75,196,0.4);
+        }
+
+        /* SECTIUNI */
+        section { padding: 70px 8%; }
+        section h2 { text-align: center; font-size: 34px; margin-bottom: 20px; color: #3d2d72; }
+
+        .section-desc {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 35px auto;
+            font-size: 17px;
+            color: #524b70;
+        }
+
+        /* INDICIU VIZUAL */
+        .hint-badge {
+            display: inline-block;
+            background: #ffe699;
+            color: #5c4300;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            animation: pulseHint 2s infinite;
+        }
+
+        /* PANOUL INTERACTIV (LABORATOR ARTIST) */
+        .interactive-panel-section {
+            background: #1a1530;
+            color: white;
+            border-radius: 25px;
+            margin: 40px 8%;
+            padding: 50px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .interactive-panel-section h2 { color: #ffffff; }
+        .interactive-panel-section .section-desc { color: #b3a7d6; }
+
+        .lab-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .lab-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            max-width: 450px;
+            justify-content: center;
+        }
+
+        .tool-btn {
+            background: #2d2552;
+            border: 2px solid #6c4bc4;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-btn:hover {
+            background: #6c4bc4;
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108,75,196,0.5);
+        }
+
+        .tool-btn.active {
+            background: #8b5cf6;
+            border-color: #a78bfa;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+        }
+
+        .lab-display {
+            background: #251f42;
+            border-radius: 20px;
+            padding: 30px;
+            min-width: 300px;
+            max-width: 450px;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+[28.09.2026 20:50] Yoma: justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid #3d346b;
+            position: relative;
+        }
+
+        .lab-icon-preview {
+            font-size: 60px;
+            margin-bottom: 15px;
+            transition: transform 0.5s ease;
+        }
+
+        .lab-icon-preview.animate-pop {
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        /* CARDURI 3D FLIP */
+        .cards-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            height: 260px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.7s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner, .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(40, 30, 70, 0.12);
+        }
+
+        .flip-card-front {
+            background: white;
+            color: #25233a;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #6c4bc4, #483285);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        /* LISTĂ RESPONSABILITATE */
+        .important { background: #eee8ff; }
+        ul.resp-list { max-width: 800px; margin: auto; list-style: none; }
+        ul.resp-list li {
+            margin-bottom: 15px;
+            background: white;
+            padding: 18px 22px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(40,30,70,0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        ul.resp-list li:hover { transform: translateX(10px); box-shadow: 0 8px 18px rgba(40,30,70,0.15); }
+
+        /* QUIZ SECTION */
+        .quiz-section {
+            background: white;
+            border-radius: 25px;
+            padding: 50px 30px;
+            max-width: 800px;
+            margin: 40px auto;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            margin: 10px 0;
+            background: #f5f3ff;
+            border: 2px solid #d9c7ff;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-option:hover {
+            background: #e9e0ff;
+            border-color: #6c4bc4;
+        }
+
+        .quiz-option.correct {
+            background: #d1fae5;
+            border-color: #10b981;
+            color: #065f46;
+            font-weight: bold;
+        }
+
+        .quiz-option.wrong {
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .quiz-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            display: none;
+        }
+
+        /* FOOTER & BUTTONS */
+        #topButton {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+[28.09.2026 20:50] Yoma: background: #6c4bc4;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+
+        #topButton.show { opacity: 1; pointer-events: auto; }
+        #topButton:hover { transform: translateY(-5px); background: #51349c; }
+
+        footer { background: #211b3d; color: white; text-align: center; padding: 25px; }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 34px; }
+            nav { justify-content: center; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARĂ PROGRES LECTURĂ -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- MENIU DE NAVIGARE -->
+    <header>
+        <nav>
+            <div class="logo">🎨 Cultura Informațională</div>
+            <ul class="nav-links">
+                <li><a href="#despre">Despre</a></li>
+                <li><a href="#laborator">Panou Interactiv</a></li>
+                <li><a href="#concepte">Concepte 3D</a></li>
+                <li><a href="#responsabilitate">Responsabilitate</a></li>
+                <li><a href="#quiz">Test/Quiz</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Cultura informațională și rolul unui artist</h1>
+            <p>Cum informația, arta și tehnologia se întâlnesc în societatea digitală.</p>
+            <a href="#despre" class="button">Explorează mai jos ↓</a>
+        </div>
+    </section>
+
+    <!-- DESPRE -->
+    <section id="despre">
+        <h2>Ce este cultura informațională?</h2>
+        <p class="section-desc">Capacitatea unei persoane de a găsi, înțelege, analiza și utiliza informația într-un mod etic și responsabil.</p>
+    </section>
+
+    <!-- PANOUL INTERACTIV: LABORATORUL ARTISTULUI DIGITAL -->
+    <div class="interactive-panel-section" id="laborator">
+        <div style="text-align: center;">
+            <span class="hint-badge">💡 Apasă pe elementele de mai jos!</span>
+            <h2>Studio-ul Virtual al Artistului</h2>
+            <p class="section-desc">Interacționează cu instrumentele pentru a descoperi din ce constă activitatea digitală.</p>
         </div>
 
-        <div class="quiz-result" id="quizResult"></div>
+        <div class="lab-container">
+            <div class="lab-tools">
+                <button class="tool-btn active" onclick="selectTool('pensula', this)">
+                    <span>🖌️</span> Pensula Digitală
+                </button>
+                <button class="tool-btn" onclick="selectTool('paleta', this)">
+                    <span>🎨</span> Paleta de Culori
+                </button>
+                <button class="tool-btn" onclick="selectTool('layer', this)">
+                    <span>📚</span> Straturile (Layers)
+                </button>
+                <button class="tool-btn" onclick="selectTool('lumina', this)">
+                    <span>💡</span> Umbra și Lumina
+                </button>
+            </div>
+
+            <div class="lab-display">
+                <div class="lab-icon-preview" id="labIcon">🖌️</div>
+                <h3 id="labTitle" style="color: #c9a7ff; margin-bottom: 10px;">Pensula Digitală</h3>
+                <p id="labDesc" style="color: #d1d5db; font-size: 15px;">Permite simularea picturii tradiționale (acuarelă, ulei) cu precizie matematică și flexibilitate infinită.</p>
+            </div>
+        </div>
     </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-    <p>© 2026 — Cultura informațională și rolul artistului</p>
-</footer>
+    <!-- CARDURI 3D INTERACTIVE -->
+    <section id="concepte">
+        <div style="text-align: center;">
+            <span class="hint-badge">👆 Treci cu mouse-ul sau apasă pe card!</span>
+            <h2>Concepte Cheie în Artă și Informație</h2>
+        </div>
 
-<!-- BUTON SCROLL SUS -->
-<button id="topButton" onclick="scrollToTop()">↑</button>
+        <div class="cards-3d">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+[28.09.2026 20:50] Yoma: <div style="font-size: 40px;">🔎</div>
+                        <h3>Fake News & Artă</h3>
+                        <p style="font-size: 13px; color: #666; margin-top: 10px;">Apasă pentru detalii</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Manipulare Vizuală</h3>
+                        <p>Artiștii au responsabilitatea de a nu folosi imagini modificate pentru a dezinforma sau a crea știri false.</p>
+                    </div>
+                </div>
+            </div>
 
-<!-- JAVASCRIPT INTERACTIV -->
-<script>
-    // 1. BARĂ DE PROGRES LA SCROLL
-    window.onscroll = function() {
-        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        let scrolled = (winScroll / height) * 100;
-        document.getElementById("progressBar").style.width = scrolled + "%";
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div style="font-size: 40px;">📜</div>
+                        <h3>Drepturi de Autor</h3>
+                        <p style="font-size: 13px; color: #666; margin-top: 10px;">Apasă pentru detalii</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Copyright Digital</h3>
+                        <p>Protejarea lucrărilor proprii și respectarea muncii altor creatori prin atribuirea corectă a sursei.</p>
+                    </div>
+                </div>
+            </div>
 
-        // Control buton Scroll Sus
-        const topButton = document.getElementById("topButton");
-        if (winScroll > 300) {
-            topButton.classList.add("show");
-        } else {
-            topButton.classList.remove("show");
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div style="font-size: 40px;">🤖</div>
+                        <h3>Artă & AI</h3>
+                        <p style="font-size: 13px; color: #666; margin-top: 10px;">Apasă pentru detalii</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Inteligența Artificială</h3>
+                        <p>Utilizarea AI ca un instrument suplimentar de inspirație, menținând totodată amprenta creativă umană.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESPONSABILITATE -->
+    <section id="responsabilitate" class="important">
+        <h2>Responsabilitatea artistului digital</h2>
+        <ul class="resp-list">
+            <li><span>🎨</span> Create de lucrări originale și respectarea licențelor de utilizare.</li>
+            <li><span>🔎</span> Verificarea surselor din care se inspiră înainte de a distribui un mesaj.</li>
+            <li><span>💬</span> Promovarea valorilor pozitive și stimularea gândirii critice la public.</li>
+        </ul>
+    </section>
+
+    <!-- QUIZ INTERACTIV -->
+    <section id="quiz">
+        <div class="quiz-section">
+            <div style="text-align: center;">
+                <span class="hint-badge">🎮 Mini-Test</span>
+                <h2>Testează-ți cunoștințele!</h2>
+            </div>
+
+            <div id="quizContainer">
+                <p style="font-size: 18px; font-weight: bold; margin-bottom: 15px;" id="questionText">
+                    1. Ce înseamnă să verifici o sursă de informație?
+                </p>
+                <div id="optionsContainer">
+                    <button class="quiz-option" onclick="checkAnswer(this, false)">A) Să o distribui imediat prietenilor</button>
+                    <button class="quiz-option" onclick="checkAnswer(this, true)">B) Să controlezi dacă este credibilă și reală</button>
+                    <button class="quiz-option" onclick="checkAnswer(this, false)">C) Să o ștergi din calculator</button>
+                </div>
+            </div>
+
+            <div class="quiz-result" id="quizResult"></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 — Cultura informațională și rolul artistului</p>
+    </footer>
+
+    <!-- BUTON SCROLL SUS -->
+    <button id="topButton" onclick="scrollToTop()">↑</button>
+
+    <!-- JAVASCRIPT INTERACTIV -->
+    <script>
+        // 1. BARĂ DE PROGRES LA SCROLL
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.
+[28.09.2026 20:50] Yoma: documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+
+            // Control buton Scroll Sus
+            const topButton = document.getElementById("topButton");
+            if (winScroll > 300) {
+                topButton.classList.add("show");
+            } else {
+                topButton.classList.remove("show");
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
-    };
 
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+        // 2. PANOUL INTERACTIV (LABORATOR ARTIST)
+        const toolData = {
+            pensula: {
+                icon: "🖌️",
+                title: "Pensula Digitală",
+                desc: "Instrumentul principal de desen. Permite ajustarea opacității, grosimii și finisajelor pentru a crea texture unice."
+            },
+            paleta: {
+                icon: "🎨",
+                title: "Paleta de Culori",
+                desc: "Constă în teorii ale culorilor (RGB, CMYK) și armonii vizuale care influențează direct starea de spirit a privitorului."
+            },
+            layer: {
+                icon: "📚",
+                title: "Straturile (Layers)",
+                desc: "Permit separarea elementelor grafice (fundal, personaje, text) pentru o editare independentă și fără riscuri."
+            },
+            lumina: {
+                icon: "💡",
+                title: "Umbra și Lumina",
+                desc: "Adaugă profunzime 3D și volum creației vizuale, ghidând atenția privitorului către punctul de interes."
+            }
+        };
 
-    // 2. PANOUL INTERACTIV (LABORATOR ARTIST)
-    const toolData = {
-        pensula: {
-            icon: "🖌️",
-            title: "Pensula Digitală",
-            desc: "Instrumentul principal de desen. Permite ajustarea opacității, grosimii și finisajelor pentru a crea texture unice."
-        },
-        paleta: {
-            icon: "🎨",
-            title: "Paleta de Culori",
-            desc: "Constă în teorii ale culorilor (RGB, CMYK) și armonii vizuale care influențează direct starea de spirit a privitorului."
-        },
-        layer: {
-            icon: "📚",
-            title: "Straturile (Layers)",
-            desc: "Permit separarea elementelor grafice (fundal, personaje, text) pentru o editare independentă și fără riscuri."
-        },
-        lumina: {
-            icon: "💡",
-            title: "Umbra și Lumina",
-            desc: "Adaugă profunzime 3D și volum creației vizuale, ghidând atenția privitorului către punctul de interes."
+        function selectTool(toolKey, btnElement) {
+            // Elimina clasa active de la toate butoanele
+            document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const data = toolData[toolKey];
+            const iconEl = document.getElementById('labIcon');
+
+            // Animație de Pop pe pictogramă
+            iconEl.classList.remove('animate-pop');
+            void iconEl.offsetWidth; // Trigger reflow
+            iconEl.classList.add('animate-pop');
+
+            iconEl.innerText = data.icon;
+            document.getElementById('labTitle').innerText = data.title;
+            document.getElementById('labDesc').innerText = data.desc;
         }
-    };
 
-    function selectTool(toolKey, btnElement) {
-        // Elimina clasa active de la toate butoanele
-        document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
-        btnElement.classList.add('active');
+        // 3. QUIZ INTERACTIV
+        function checkAnswer(button, isCorrect) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.disabled = true);
 
-        const data = toolData[toolKey];
-        const iconEl = document.getElementById('labIcon');
+            const resultDiv = document.getElementById('quizResult');
 
-        // Animație de Pop pe pictogramă
-        iconEl.classList.remove('animate-pop');
-        void iconEl.offsetWidth; // Trigger reflow
-        iconEl.classList.add('animate-pop');
-
-        iconEl.innerText = data.icon;
-        document.getElementById('labTitle').innerText = data.title;
-        document.getElementById('labDesc').innerText = data.desc;
-    }
-
-    // 3. QUIZ INTERACTIV
-    function checkAnswer(button, isCorrect) {
-        const options = document.querySelectorAll('.quiz-option');
-        options.forEach(opt => opt.disabled = true);
-
-        const resultDiv = document.getElementById('quizResult');
-
-        if(isCorrect) {
-            button.classList.add('correct');
-            resultDiv.style.display = 'block';
-            resultDiv.style.background = '#d1fae5';
-            resultDiv.style.color = '#065f46';
-            resultDiv.innerHTML = "🎉 Corect! Cultura informațională presupune verificarea atentă a surselor.";
-        } else {
-            button.classList.add('wrong');
-            resultDiv.style.display = 'block';
-            resultDiv.style.background = '#fee2e2';
-            resultDiv.style.color = '#991b1b';
-            resultDiv.innerHTML = "❌ Incorect! Răspunsul corect era B (Verificarea credibilității).";
+            if(isCorrect) {
+                button.classList.add('correct');
+                resultDiv.style.display = 'block';
+                resultDiv.style.background = '#d1fae5';
+                resultDiv.style.color = '#065f46';
+                resultDiv.innerHTML = "🎉 Corect! Cultura informațională presupune verificarea atentă a surselor.";
+            } else {
+                button.classList.add('wrong');
+                resultDiv.style.display = 'block';
+                resultDiv.style.background = '#fee2e2';
+                resultDiv.style.color = '#991b1b';
+                resultDiv.innerHTML = "❌ Incorect! Răspunsul corect era B (Verificarea credibilității).";
+            }
         }
-    }
-</script>
+    </script>
+</body>
+</html>
